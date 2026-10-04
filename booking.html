@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Booking Les</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            N
+        </div>
+
+        <span>
+            Ngajarin
+        </span>
+
+    </div>
+
+</header>
+
+
+<main class="booking-page">
+
+    <div class="booking-header">
+
+        <p class="muted">
+            Booking lesson
+        </p>
+
+        <h1 id="teacherName">
+            Loading...
+        </h1>
+
+        <p id="teacherEmail" class="muted">
+        </p>
+
+    </div>
+
+
+    <div id="subjects" class="booking-grid">
+
+        Loading...
+
+    </div>
+
+</main>
+
+
+<div
+    id="bookingModal"
+    class="modal hidden"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Booking pelajaran
+        </h2>
+
+
+        <p
+            id="selectedSubject"
+            class="muted"
+        ></p>
+
+
+        <label>
+            Nama kamu
+        </label>
+
+        <input
+            id="studentName"
+            placeholder="Nama lengkap"
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            id="studentEmail"
+            type="email"
+            placeholder="email@gmail.com"
+        >
+
+
+        <label>
+            Tanggal
+        </label>
+
+        <input
+            id="bookingDate"
+            type="date"
+        >
+
+
+        <label>
+            Jam
+        </label>
+
+        <input
+            id="bookingTime"
+            type="time"
+        >
+
+
+        <div class="modal-buttons">
+
+            <button
+                id="cancelBooking"
+                class="btn-secondary"
+            >
+                Batal
+            </button>
+
+            <button
+                id="confirmBooking"
+                class="btn-primary"
+            >
+                Booking
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script
+    type="module"
+    src="./js/booking.js"
+></script>
+
+</body>
+</html>

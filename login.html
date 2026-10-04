@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - Ngajarin</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="login-page">
+
+
+<div class="login-box">
+
+    <div class="logo center">
+
+        <div class="logo-icon">
+            N
+        </div>
+
+        <span>
+            Ngajarin
+        </span>
+
+    </div>
+
+
+    <h1>
+        Selamat datang
+    </h1>
+
+    <p class="muted">
+        Login untuk mengelola workspace kamu.
+    </p>
+
+
+    <button
+        id="googleLogin"
+        class="google-button"
+    >
+
+        <span class="google-icon">
+            G
+        </span>
+
+        Lanjutkan dengan Google
+
+    </button>
+
+
+    <a href="index.html" class="back">
+        ← Kembali ke halaman utama
+    </a>
+
+</div>
+
+
+<script type="module">
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup
+}
+from
+"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+import {
+    app
+}
+from "./js/firebase.js";
+
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+
+document
+.getElementById("googleLogin")
+.addEventListener("click", async () => {
+
+    try {
+
+        const result =
+            await signInWithPopup(
+                auth,
+                provider
+            );
+
+        console.log(
+            "Login:",
+            result.user
+        );
+
+        window.location.href =
+            "dashboard.html";
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Login gagal: " +
+            error.message
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

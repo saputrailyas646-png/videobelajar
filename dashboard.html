@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            N
+        </div>
+
+        <span>
+            Ngajarin
+        </span>
+
+    </div>
+
+
+    <div class="user-area">
+
+        <img
+            id="userPhoto"
+            class="avatar"
+        >
+
+        <span id="userName">
+            Loading...
+        </span>
+
+        <button
+            id="logout"
+            class="logout"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <p class="muted">
+                Dashboard
+            </p>
+
+            <h1>
+                Workspace kamu
+            </h1>
+
+        </div>
+
+
+        <button
+            id="shareButton"
+            class="btn-primary"
+        >
+            🔗 Bagikan halaman booking
+        </button>
+
+    </div>
+
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <span>
+                Pelajaran
+            </span>
+
+            <strong id="subjectCount">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>
+                Booking
+            </span>
+
+            <strong id="bookingCount">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>
+                Status
+            </span>
+
+            <strong class="green">
+                Aktif
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <section class="dashboard-grid">
+
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Mata pelajaran
+                    </h2>
+
+                    <p class="muted">
+                        Atur pelajaran yang kamu ajarkan.
+                    </p>
+
+                </div>
+
+                <button
+                    id="addSubject"
+                    class="btn-primary"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+
+            <div id="subjectList">
+
+                <div class="empty">
+                    Belum ada mata pelajaran.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h2>
+                Profil
+            </h2>
+
+            <div class="profile">
+
+                <img
+                    id="profilePhoto"
+                    class="profile-photo"
+                >
+
+                <h3 id="profileName">
+                    -
+                </h3>
+
+                <p
+                    id="profileEmail"
+                    class="muted"
+                >
+                    -
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<div
+    id="modal"
+    class="modal hidden"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Tambah mata pelajaran
+        </h2>
+
+
+        <label>
+            Nama pelajaran
+        </label>
+
+        <input
+            id="subjectName"
+            placeholder="Contoh: Matematika"
+        >
+
+
+        <label>
+            Harga
+        </label>
+
+        <input
+            id="subjectPrice"
+            type="number"
+            placeholder="50000"
+        >
+
+
+        <label>
+            Durasi
+        </label>
+
+        <select id="subjectDuration">
+
+            <option value="30">
+                30 menit
+            </option>
+
+            <option value="60">
+                60 menit
+            </option>
+
+            <option value="90">
+                90 menit
+            </option>
+
+            <option value="120">
+                120 menit
+            </option>
+
+        </select>
+
+
+        <div class="modal-buttons">
+
+            <button
+                id="cancelModal"
+                class="btn-secondary"
+            >
+                Batal
+            </button>
+
+            <button
+                id="saveSubject"
+                class="btn-primary"
+            >
+                Simpan
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script
+    type="module"
+    src="./js/dashboard.js"
+></script>
+
+</body>
+</html>
