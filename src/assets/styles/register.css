@@ -1,0 +1,161 @@
+/* @import url("../global.css"); */
+
+body {
+  background-color: #fffdf5;
+  min-height: 100vh;
+  display: box;
+}
+
+.nav-a{
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.a-img {
+  width: 193px;
+}
+
+.register-container {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background-color: rgba(252, 248, 202, 1);
+}
+
+.register-box {
+  width: min(100%, 590px);
+  height: 720px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 8px;
+}
+
+.register-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.register-box h2 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+
+.subjudul {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.register-box label {
+  font-size: 11px;
+}
+
+.register-box input,
+.register-box select {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ddd;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.phone {
+  display: flex;
+  height: 40px;
+  gap: 5px;
+}
+
+.phone select {
+  width: 70px;
+  height: 40px;
+}
+
+.phone input {
+  flex: 1;
+  min-width: 0;
+}
+
+.lupa {
+  text-align: right;
+  font-size: 10px;
+  color: #555;
+  margin-top: 3px;
+}
+
+.register-box button {
+  width: 100%;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-daftar {
+  background-color: #32c94f;
+  color: white;
+}
+
+.btn-masuk {
+  background-color: #dff7e2;
+}
+
+.a-masuk {
+  text-decoration: none;
+  color: #32a847;
+}
+
+.atau {
+  text-align: center;
+  justify-content: center;
+  font-size: 11px;
+  margin: 3px 0;
+}
+
+.btn-google {
+  padding: 10px;
+  background-color: white;
+  border: 2px solid #ddd;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.img-daftar {
+  height: 15px;
+}
+
+@media (max-width: 890px) {
+
+  .a-img {
+    width: 140px;
+    margin: 14px;
+  }
+
+  .register-box {
+    width: 320px;
+    height: 620px;
+    gap: 12px;
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .register-box form {
+    gap: 8px;
+  }
+  .nav-a{
+    height: 55px;
+  }
+}

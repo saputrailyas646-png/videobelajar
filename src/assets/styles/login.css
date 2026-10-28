@@ -1,0 +1,195 @@
+/* @import url("./global.css"); */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #490d30;
+} 
+
+.nav-log {
+  width: 100%;
+  height: 80px;
+  box-shadow: #444 20px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-container {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background-color:rgba(252, 248, 202, 1);
+}
+
+.login-box {
+  width: min(100%, 590px);
+  height: 617px;
+  background-color: white;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 8px;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-box label {
+  font-size: 16px;
+}
+
+.login-box h2 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.deskripsi {
+  text-align: center;
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.login-box label {
+  font-size: 11px;
+  color: #444;
+}
+
+.login-box label span {
+  color: red;
+}
+
+.login-box input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 11px;
+  outline: none;
+}
+
+.login-box input:focus {
+  border-color: #42d957;
+}
+
+.password-box {
+  position: relative;
+  width: 100%;
+}
+.error-label{
+  color: red;
+  font-size: 8px;
+}
+.password-box input {
+  padding-right: 35px;
+}
+
+.password-box span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #777;
+  cursor: pointer;
+}
+
+.lupa {
+  text-align: right;
+  font-size: 9px;
+  color: #555;
+  text-decoration: none;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.login-box button {
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.btn-masuk {
+  border: none;
+  background-color: #32ce4b;
+  color: white;
+}
+
+.btn-daftar {
+  border: none;
+  background-color: #e1fbdc;
+  color: #20b936;
+}
+
+.a-daftar {
+  color: #20b936;
+  text-decoration: none;
+}
+
+.atau {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.atau span {
+  flex: 1;
+  height: 1px;
+  background-color: #eee;
+}
+
+.atau p {
+  font-size: 9px;
+  color: #777;
+}
+
+.btn-google {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.img-google {
+  height: 15px;
+}
+
+@media (max-width: 768px) {
+  .a-img {
+    width: 144px;
+  }
+
+  .login-box {
+    width: min(100%, 320px);
+    height: auto;
+    min-height: 514px;
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .nav-log {
+    width: 100%;
+  }
+}
