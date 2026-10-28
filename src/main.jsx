@@ -14,9 +14,9 @@ const root = createRoot(app);
 root.render(
   <BrowserRouter>
     <Routes>
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/home" element={<HomePage />} />
     </Routes>
   </BrowserRouter>,
 );

@@ -1,11 +1,72 @@
+import VideoCard from "./videocard";
+
 import "../assets/styles/home.css";
 import logo from "../assets/logo.png";
-import video from "../assets/video1.mp4"
-import IconPp from "../assets/iconpp.png"
-
-
+import video from "../assets/video1.mp4";
+import IconPp from "../assets/iconpp.png";
 
 function HomePage() {
+
+const videoData = [
+  {
+    id: 1,
+    title: "Big 4 Auditor Financial Analyst",
+    description:
+      "Mulai transformasi dengan instruktur profesional dan berpengalaman.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+  {
+    id: 2,
+    title: "Big 4 Auditor Financial Analyst",
+    description: "Tingkatkan kemampuan analisis dan pemahaman bisnis.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+  {
+    id: 3,
+    title: "Big 4 Auditor Financial Analyst",
+    description: "Tingkatkan kemampuan analisis dan pemahaman bisnis.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+  {
+    id: 4,
+    title: "Big 4 Auditor Financial Analyst",
+    description: "Belajar strategi bisnis dan pengembangan diri.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+  {
+    id: 5,
+    title: "Big 4 Auditor Financial Analyst",
+    description: "Pelajari dasar pengelolaan keuangan secara praktis.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+  {
+    id: 6,
+    title: "Big 4 Auditor Financial Analyst",
+    description: "Kuasai skill baru dengan materi yang mudah dipahami.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+  {
+    id: 7,
+    title: "Big 4 Auditor Financial Analyst",
+    description: "Belajar lebih mudah dengan materi yang terstruktur.",
+    author: "Jenna Ortega",
+    role: "Senior Accountant",
+    price: "Rp 300K",
+  },
+];
+
   return (
     <>
       <header>
@@ -46,122 +107,20 @@ function HomePage() {
             <a href="#"> Pengembangan Diri</a>
             <a href="#"> Bisnis</a>
           </div>
+
           <div className="video-grid">
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3> Big 4 Auditor Financial Analyst</h3>
-                <p>
-                  Mulai transformasi dengan instruktur profesional dan
-                  berpengalaman.{" "}
-                </p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price"> Rp 300K</strong>
-              </div>
-            </article>
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3> Big 4 Auditor Financial Analyst</h3>
-                <p>Tingkatkan kemampuan analisisdan pemahaman bisnis.</p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price">Rp 300K</strong>
-              </div>
-            </article>
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3> Big 4 Auditor Financial Analyst</h3>
-                <p>Tingkatkan kemampuan analisisdan pemahaman bisnis.</p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price">Rp 300K</strong>
-              </div>
-            </article>
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3>Big 4 Auditor Financial Analyst </h3>
-                <p>Belajar strategi bisnis dan pengembangan diri. </p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price">Rp 300K</strong>
-              </div>
-            </article>
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3>Big 4 Auditor Financial Analyst</h3>
-                <p>Pelajari dasar pengelolaan keuangan secara praktis.</p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price">Rp 300K</strong>
-              </div>
-            </article>
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3>Big 4 Auditor Financial Analyst</h3>
-                <p>Kuasai skill baru dengan materi yang mudah dipahami.</p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price">Rp 300K</strong>
-              </div>
-            </article>
-            <article className="video-card">
-              <video src={video} controls="a" />
-              <div className="video-content">
-                <h3> Big 4 Auditor Financial Analyst</h3>
-                <p>Belajar lebih mudah dengan materi yang terstruktur.</p>
-                <div className="author">
-                  <img src={IconPp} alt="Jenna Ortega" />
-                  <div>
-                    <span>Jenna Ortega</span>
-                    <small>Senior Accountant</small>
-                  </div>
-                </div>
-                <div className="rating">⭐⭐⭐⭐⭐</div>
-                <strong className="price">Rp 300K</strong>
-              </div>
-            </article>
+            {videoData.map((item) => (
+              <VideoCard
+                key={item.id}
+                video={video}
+                title={item.title}
+                description={item.description}
+                iconPp={IconPp}
+                author={item.author}
+                role={item.role}
+                price={item.price}
+              />
+            ))}
           </div>
         </section>
         <section className="newsletter">
@@ -217,4 +176,4 @@ function HomePage() {
   );
 }
 
-export default HomePage ;
+export default HomePage;

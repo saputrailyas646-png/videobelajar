@@ -154,6 +154,20 @@ body {
     display: block;
     border-radius: 8px;
 }
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: 10px;
+}
+
+.rating{
+    padding-left: 36px;
+}
+.price {
+  white-space: nowrap;
+}
 /* 
 .video-card {
     width: 100%;
