@@ -6,7 +6,10 @@ import logoGoogle from "../assets/logos_google-icon.png";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("")
+
   const [errorUsername, setErrorUsername] = useState(true);
+  const [errorPassword, setErrorPassword] = useState (true)
 
   const handleUsername = (event) => {
     const value = event.target.value;
@@ -17,6 +20,17 @@ function LoginPage() {
       setErrorUsername(false);
     }
   };
+
+  const handlePassword = (event) => {
+    const value = event.target.value;
+
+    setPassword(value);
+
+    if (value.trim().length > 0) {
+      setErrorPassword(false);
+    }
+  };
+
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -33,7 +47,7 @@ function LoginPage() {
   return (
     <>
       <nav className="nav-log">
-        <img src={logo} alt="Logo Video Belajar" />
+        <img className="img-nav"   src={logo} alt="Logo Video Belajar" />
       </nav>
 
       <main className="login-container">
@@ -74,11 +88,24 @@ function LoginPage() {
               <input
                 type="password"
                 id="password"
+                value={password}
+                onChange={handlePassword}
+                onBlur={() => setErrorPassword(password.trim().length === 0)}
                 placeholder="Masukkan kata sandi"
                 required
               />
               <span>◉</span>
             </div>
+
+            <span
+              id="error-label-password"
+              className="error-label"
+              style={{
+                visibility: errorPassword ? "visible" : "hidden",
+              }}
+            >
+              password wajib diisi.
+            </span>
 
             <a href="#" className="lupa">
               Lupa Password?

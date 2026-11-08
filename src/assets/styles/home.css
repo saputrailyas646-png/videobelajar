@@ -12,6 +12,9 @@ html {
     width: 100%;
     overflow-x: hidden;
 }
+.hamburger {
+    display: none;
+}
 body {
     width: 100%;
     min-height: 100vh;
@@ -24,6 +27,7 @@ body {
     min-height: 60px;
     background: white;
 }
+
 .navbar {
     width: 100%;
     min-height: 60px;
@@ -40,6 +44,40 @@ body {
     flex-shrink: 1;
     min-width: 0;
 }
+.btn-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color:rgba(62, 207, 76, 1);
+    border-style: inset;
+    border-radius: 10px;
+    border: none;
+    width: 94px;
+    height: 42px;
+}
+.btn-register:link,
+.btn-register:visited,
+.btn-register:hover,
+.btn-register:active {
+  text-decoration: none;
+      color: rgba(62, 207, 76, 1);}
+
+.btn-register{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgba(62, 207, 76, 1);
+    width: 94px;
+    height: 42px;
+      text-decoration: none;
+
+}
+
+
 .nav-menu {
     display: flex;
     align-items: center;
@@ -359,8 +397,46 @@ footer {
 }
 
 @media (max-width: 600px) {
+    .hamburger {
+        display: block;
+    }
+
+ 
+;    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+        background-color: white;
+        box-sizing: border-box;
+        z-index: 100;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .btn-login,
+    .btn-register {
+        width: 338px;
+        height: 42px;
+    }
+
+
     .navbar {
-        min-height: 55px;
+        width: 100%;
         padding: 0 15px;
         gap: 8px;
     }
@@ -371,13 +447,7 @@ footer {
     .nav-menu {
         gap: 8px;
     }
-    .nav-menu a {
-        font-size: 12px;
-    }
-    .nav-menu img {
-        width: 25px;
-        height: 25px;
-    }
+    
     .container {
         padding: 0 12px;
     }

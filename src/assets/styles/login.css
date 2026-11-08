@@ -1,4 +1,3 @@
-/* @import url("./global.css"); */
 
 * {
   box-sizing: border-box;
@@ -14,11 +13,15 @@ body {
 .nav-log {
   width: 100%;
   height: 80px;
-  box-shadow: #444 20px;
+  box-shadow: #0a0909 20px;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.img-nav{
+  width: 237px;
+  height: auto;
 }
 
 .login-container {
@@ -180,13 +183,18 @@ body {
   .a-img {
     width: 144px;
   }
+  .img-nav{
+    width: 152px;
+    height: 42px;
+  }
+  .nav-log {height: 60px;}
 
   .login-box {
-    width: min(100%, 320px);
-    height: auto;
+    width: min(100%, 360px);
+    height: 620px;
     min-height: 514px;
     padding: 14px;
-    gap: 14px;
+    gap: px;
   }
 
   .nav-log {

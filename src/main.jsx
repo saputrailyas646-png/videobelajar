@@ -5,7 +5,8 @@ import "./assets/styles/global.css";
 
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
-import HomePage from "./pages/home";
+import HomePage from "./assets/Homepage/home";
+import CategoriPage from "./assets/Homepage/kategori";
 
 const app = document.getElementById("root");
 
@@ -17,6 +18,7 @@ root.render(
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/category" element={<CategoriPage />} />
     </Routes>
   </BrowserRouter>,
 );
