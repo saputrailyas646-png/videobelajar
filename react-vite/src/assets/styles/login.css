@@ -10,18 +10,18 @@ body {
   background-color: #490d30;
 } 
 
-.nav-log {
-  width: 100%;
-  height: 80px;
-  box-shadow: #0a0909 20px;
-  background-color: rgba(255, 255, 255, 1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.navbar {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
 }
-.img-nav{
-  width: 237px;
-  height: auto;
+.imglogo {
+    width: 237px;
+    height: auto;
 }
 
 .login-container {
@@ -164,14 +164,14 @@ body {
   color: #777;
 }
 
-.btn-google {
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #ddd;
-  color: #333;
+.btn-google12 {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 10;
+  color: rgb(19, 18, 18);
+  background-color: rgba(241, 241, 241, 1);
   gap: 5px;
 }
 
@@ -180,15 +180,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .a-img {
-    width: 144px;
-  }
-  .img-nav{
-    width: 152px;
-    height: 42px;
-  }
-  .nav-log {height: 60px;}
-
   .login-box {
     width: min(100%, 360px);
     height: 620px;
@@ -196,8 +187,16 @@ body {
     padding: 14px;
     gap: px;
   }
+  .navbar {
+        width: 100%;
+        height: 55px;
+        padding: 0 15px;
+        position: relative;
+    }
 
-  .nav-log {
-    width: 100%;
-  }
+    .imglogo {
+        width: 144px;
+        height: auto;
+        object-fit: contain;
+    }
 }

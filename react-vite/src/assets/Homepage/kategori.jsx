@@ -267,9 +267,7 @@ function CategoriPage() {
             </div>
           </div>
 
-          {/* AREA COURSE */}
           <div className="category-course-area">
-            {/* SEARCH DAN FILTER KATEGORI */}
             <div className="course-tools">
               <select
                 value={selectedCategory}
@@ -298,8 +296,6 @@ function CategoriPage() {
                 <button type="button">🔍</button>
               </div>
             </div>
-
-            {/* CARD VIDEO */}
             <div className="category-course-grid">
               {currentVideos.length > 0 ? (
                 currentVideos.map((item) => (
@@ -345,13 +341,11 @@ function CategoriPage() {
             <img src={logo} alt="logo" className="imglogo" />
 
             <p>Platform Video Pembelajaran untuk meningkatkan skill.</p>
-
             <p>Jl. Pendidikan No. 50, Indonesia</p>
             <p>+62-812-3456-7890</p>
           </div>
 
           <div className="listfooter">
-            {/* KATEGORI */}
             <div className="footer-column">
               <h3 onClick={() => setKategoriOpen(!kategoriOpen)}>
                 Kategori
@@ -366,8 +360,6 @@ function CategoriPage() {
                 <a href="#">Desain</a>
               </div>
             </div>
-
-            {/* PERUSAHAAN */}
             <div className="footer-column">
               <h3 onClick={() => setPerusahaanOpen(!perusahaanOpen)}>
                 Perusahaan
@@ -383,8 +375,6 @@ function CategoriPage() {
                 <a href="#">Bantuan</a>
               </div>
             </div>
-
-            {/* KOMUNITAS */}
             <div className="footer-column">
               <h3 onClick={() => setKomunitasOpen(!komunitasOpen)}>
                 Komunitas
@@ -397,13 +387,11 @@ function CategoriPage() {
                 <a href="#">Tips Sukses</a>
                 <a href="#">Blog</a>
                 <a href="#">Event</a>
-                <a href="halloword">hall word</a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* COPYRIGHT */}
         <div className="copyright">
           <p>© 2026 Copyright Sayur All Rights Reserved.</p>
         </div>

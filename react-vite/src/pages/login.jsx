@@ -46,8 +46,8 @@ function LoginPage() {
 
   return (
     <>
-      <nav className="nav-log">
-        <img className="img-nav"   src={logo} alt="Logo Video Belajar" />
+      <nav className="navbar">
+        <img src={logo} alt="logo" className="imglogo" />
       </nav>
 
       <main className="login-container">
@@ -132,7 +132,7 @@ function LoginPage() {
             <span />
           </div>
 
-          <button type="button" className="btn-google">
+          <button type="button" className="btn-google12">
             <img src={logoGoogle} alt="Google" className="img-google" />
             Masuk dengan Google
           </button>

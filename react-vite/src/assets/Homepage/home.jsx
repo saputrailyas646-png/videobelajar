@@ -12,8 +12,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 function HomePage() {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-
+// nav
+  const [menuOpen, setMenuOpen] = useState(true);
+  // footr
+   const [kategoriOpen, setKategoriOpen] = useState(false);
+   const [perusahaanOpen, setPerusahaanOpen] = useState(false);
+   const [komunitasOpen, setKomunitasOpen] = useState(false);
   // Data video course
   const videoData = [
     {
@@ -79,20 +83,18 @@ function HomePage() {
     <>
       <nav className="navbar">
         <img className="imglogo" src={logo} alt="profile" />
-
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger">
           ☰
         </button>
 
         <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
-
-          <a href="/category">Kategori</a>
-
-          <a className="btn-login" href="/login">
+          <a className="kategori" href="/category">
+            Kategori
+          </a>
+          <a className="login" href="/login">
             Login
           </a>
-
-          <a className="btn-register" href="/register">
+          <a className="register" href="/register">
             Register
           </a>
         </div>
@@ -171,46 +173,67 @@ function HomePage() {
         </section>
       </main>
       {/* Footer */}
-      <footer>
-        <div className="footer-container">
-          <div className="footer-column">
-            <h3 className="footer-logo">videobelajar</h3>
-
-            <p>Platform Video Pembelajaran untuk meningkatkan skill.</p>
-
-            <p>Jl. Pendidikan No. 50, Indonesia</p>
-            <p>+62-812-3456-7890</p>
-          </div>
-
-          <div className="footer-column">
-            <h3>Kategori</h3>
-            <a href="#">Digital &amp; Teknologi</a>
-            <a href="#">Pemasaran</a>
-            <a href="#">Manajemen Bisnis</a>
-            <a href="#">Pengembangan Diri</a>
-            <a href="#">Desain</a>
-          </div>
-
-          <div className="footer-column">
-            <h3>Perusahaan</h3>
-            <a href="#">Tentang Kami</a>
-            <a href="#">FAQ</a>
-            <a href="#">Kebijakan Privasi</a>
-            <a href="#">Bantuan</a>
-          </div>
-
-          <div className="footer-column">
-            <h3>Komunitas</h3>
-            <a href="#">Tips Sukses</a>
-            <a href="#">Blog</a>
-            <a href="#">Event</a>
-          </div>
-        </div>
-
-        <div className="copyright">
-          <p>© 2026 Copyright Sayur All Rights Reserved.</p>
-        </div>
-      </footer>
+           <footer className="footer-container">
+              <div className="boxfooter">
+                <div className="footer1">
+                  <img src={logo} alt="logo" className="imglogo" />
+      
+                  <p>Platform Video Pembelajaran untuk meningkatkan skill.</p>
+                  <p>Jl. Pendidikan No. 50, Indonesia</p>
+                  <p>+62-812-3456-7890</p>
+                </div>
+      
+                <div className="listfooter">
+                  <div className="footer-column">
+                    <h3 onClick={() => setKategoriOpen(!kategoriOpen)}>
+                      Kategori
+                      <span className="footer-arrow">{kategoriOpen ? "⌃" : "⌄"}</span>
+                    </h3>
+      
+                    <div className={`footer-links ${kategoriOpen ? "active" : ""}`}>
+                      <a href="#">Digital &amp; Teknologi</a>
+                      <a href="#">Pemasaran</a>
+                      <a href="#">Manajemen Bisnis</a>
+                      <a href="#">Pengembangan Diri</a>
+                      <a href="#">Desain</a>
+                    </div>
+                  </div>
+                  <div className="footer-column">
+                    <h3 onClick={() => setPerusahaanOpen(!perusahaanOpen)}>
+                      Perusahaan
+                      <span className="footer-arrow">
+                        {perusahaanOpen ? "⌃" : "⌄"}
+                      </span>
+                    </h3>
+      
+                    <div className={`footer-links ${perusahaanOpen ? "active" : ""}`}>
+                      <a href="#">Tentang Kami</a>
+                      <a href="#">FAQ</a>
+                      <a href="#">Kebijakan Privasi</a>
+                      <a href="#">Bantuan</a>
+                    </div>
+                  </div>
+                  <div className="footer-column">
+                    <h3 onClick={() => setKomunitasOpen(!komunitasOpen)}>
+                      Komunitas
+                      <span className="footer-arrow">
+                        {komunitasOpen ? "⌃" : "⌄"}
+                      </span>
+                    </h3>
+      
+                    <div className={`footer-links ${komunitasOpen ? "active" : ""}`}>
+                      <a href="#">Tips Sukses</a>
+                      <a href="#">Blog</a>
+                      <a href="#">Event</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div className="copyright">
+                <p>© 2026 Copyright Sayur All Rights Reserved.</p>
+              </div>
+            </footer>
     </>
   );
 }
