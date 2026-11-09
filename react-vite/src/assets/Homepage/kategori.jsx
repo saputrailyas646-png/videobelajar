@@ -397,6 +397,7 @@ function CategoriPage() {
                 <a href="#">Tips Sukses</a>
                 <a href="#">Blog</a>
                 <a href="#">Event</a>
+                <a href="halloword">hall word</a>
               </div>
             </div>
           </div>
