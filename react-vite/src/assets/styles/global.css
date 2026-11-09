@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: "lato",sans-serif; */
+    /* background-color: aqua; */
+}
+/* FONT DEFAULT */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONT POPPINS */
+.font-poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+/* FONT DM SANS */
+.font-dm-sans {
+    font-family: "DM Sans", sans-serif;
+}
+
+/* FONT LATO */
+/* .font-lato {
+    font-family: "Lato", sans-serif;
+} */
+
+
+h1 {
+        font-family: "Poppins";
+}
+p{
+    font-family: "DM Sans";
+
+}
