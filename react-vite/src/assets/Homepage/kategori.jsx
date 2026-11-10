@@ -335,6 +335,7 @@ function CategoriPage() {
           </div>
         </div>
       </main>
+      
       <footer className="footer-container">
         <div className="boxfooter">
           <div className="footer1">
