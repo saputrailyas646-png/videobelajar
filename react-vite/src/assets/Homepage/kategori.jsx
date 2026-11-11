@@ -1,10 +1,12 @@
 import { useState } from "react";
 
+import Navbar from "../component/navbar";
+import Footer from "../component/footer"
+
 import "../styles/category.css";
 import "../styles/global.css";
 import VideoCard from "../component/card";
 
-import logo from "../logo.png";
 import hero from "../hero.jpg";
 import hero2 from "../hero.png";
 import newsletter from "../newsletter.jpg";
@@ -13,11 +15,7 @@ import ppicon from "../ppicon.png";
 
 function CategoriPage() {
   // STATE NAVBAR DAN FOOTER
-  const [menuOpen, setMenuOpen] = useState(true);
 
-  const [kategoriOpen, setKategoriOpen] = useState(false);
-  const [perusahaanOpen, setPerusahaanOpen] = useState(false);
-  const [komunitasOpen, setKomunitasOpen] = useState(false);
 
   // STATE PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
@@ -204,27 +202,8 @@ function CategoriPage() {
 
   return (
     <>
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <img src={logo} alt="logo" className="imglogo" />
-        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger">
-          ☰
-        </button>
-        <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
-          <a className="beranda" href="/">
-            Beranda
-          </a>
-          <a className="kategori" href="/category">
-            Kategori
-          </a>
-          <a className="login" href="/login">
-            Login
-          </a>
-          <a className="register" href="/register">
-            Register
-          </a>
-        </div>
-      </nav>
+      <Navbar/>
+      
       <main className="main">
         <div className="heding">
           <h1>Koleksi Video Pembelajaran Unggulan</h1>
@@ -336,67 +315,7 @@ function CategoriPage() {
         </div>
       </main>
       
-      <footer className="footer-container">
-        <div className="boxfooter">
-          <div className="footer1">
-            <img src={logo} alt="logo" className="imglogo" />
-
-            <p>Platform Video Pembelajaran untuk meningkatkan skill.</p>
-            <p>Jl. Pendidikan No. 50, Indonesia</p>
-            <p>+62-812-3456-7890</p>
-          </div>
-
-          <div className="listfooter">
-            <div className="footer-column">
-              <h3 onClick={() => setKategoriOpen(!kategoriOpen)}>
-                Kategori
-                <span className="footer-arrow">{kategoriOpen ? "⌃" : "⌄"}</span>
-              </h3>
-
-              <div className={`footer-links ${kategoriOpen ? "active" : ""}`}>
-                <a href="#">Digital &amp; Teknologi</a>
-                <a href="#">Pemasaran</a>
-                <a href="#">Manajemen Bisnis</a>
-                <a href="#">Pengembangan Diri</a>
-                <a href="#">Desain</a>
-              </div>
-            </div>
-            <div className="footer-column">
-              <h3 onClick={() => setPerusahaanOpen(!perusahaanOpen)}>
-                Perusahaan
-                <span className="footer-arrow">
-                  {perusahaanOpen ? "⌃" : "⌄"}
-                </span>
-              </h3>
-
-              <div className={`footer-links ${perusahaanOpen ? "active" : ""}`}>
-                <a href="#">Tentang Kami</a>
-                <a href="#">FAQ</a>
-                <a href="#">Kebijakan Privasi</a>
-                <a href="#">Bantuan</a>
-              </div>
-            </div>
-            <div className="footer-column">
-              <h3 onClick={() => setKomunitasOpen(!komunitasOpen)}>
-                Komunitas
-                <span className="footer-arrow">
-                  {komunitasOpen ? "⌃" : "⌄"}
-                </span>
-              </h3>
-
-              <div className={`footer-links ${komunitasOpen ? "active" : ""}`}>
-                <a href="#">Tips Sukses</a>
-                <a href="#">Blog</a>
-                <a href="#">Event</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="copyright">
-          <p>© 2026 Copyright Sayur All Rights Reserved.</p>
-        </div>
-      </footer>
+      <Footer/>
     </>
   );
 }

@@ -1,107 +1,207 @@
-// import Header from "../component/header";
-import VideoCard from "../component/videocard";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import VideoCard from "../component/card";
+import Navbar from "../component/navbar";
+import Footer from "../component/footer";
 
 import "../styles/home.css";
-import "../styles/global.css"
+import "../styles/global.css";
 
-import video from "../video1.mp4";
-import IconPp from "../iconpp.png";
-import logo from "../logo.png"
+import hero from "../hero.jpg";
+import hero2 from "../hero.png";
+import newsletter from "../newsletter.jpg";
+import iconpp from "../iconpp.png";
+import ppicon from "../ppicon.png";
 
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 function HomePage() {
   const navigate = useNavigate();
-// nav
-  const [menuOpen, setMenuOpen] = useState(true);
-  // footr
-   const [kategoriOpen, setKategoriOpen] = useState(false);
-   const [perusahaanOpen, setPerusahaanOpen] = useState(false);
-   const [komunitasOpen, setKomunitasOpen] = useState(false);
-  // Data video course
+
+  // STATE NAVBAR
+
+ 
+  // STATE PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // DATA VIDEO COURSE
   const videoData = [
     {
       id: 1,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Tingkatkan kemampuan analisis dan pemahaman bisnis.",
+      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      image: hero,
+      avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      rating: "3.5 (86)",
       price: "Rp 300K",
+      category: "Bisnis Manajemen",
+      date: "2026-11-08",
     },
     {
       id: 2,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Tingkatkan kemampuan analisis dan pemahaman bisnis.",
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      price: "Rp 300K",
+      title: "Digital Marketing untuk Pemula",
+      description: "Pelajari strategi pemasaran digital.",
+      image: newsletter,
+      avatar: ppicon,
+      author: "John Doe",
+      role: "Digital Marketer",
+      rating: "4.5 (120)",
+      price: "Rp 250K",
+      category: "Pemasaran",
+      date: "2026-11-05",
     },
-
     {
       id: 3,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Tingkatkan kemampuan analisis dan pemahaman bisnis.",
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      price: "Rp 300K",
+      title: "Belajar UI UX Design",
+      description: "Membuat desain aplikasi yang menarik.",
+      image: hero2,
+      avatar: iconpp,
+      author: "Sarah Putri",
+      role: "UI UX Designer",
+      rating: "4.8 (95)",
+      price: "Rp 200K",
+      category: "Digital & Teknologi",
+      date: "2026-11-01",
     },
     {
       id: 4,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar strategi bisnis dan pengembangan diri.",
+      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      image: hero,
+      avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      rating: "3.5 (86)",
       price: "Rp 300K",
+      category: "Bisnis Manajemen",
+      date: "2026-11-08",
     },
     {
       id: 5,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Pelajari dasar pengelolaan keuangan secara praktis.",
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      price: "Rp 300K",
+      title: "Digital Marketing untuk Pemula",
+      description: "Pelajari strategi pemasaran digital.",
+      image: newsletter,
+      avatar: ppicon,
+      author: "John Doe",
+      role: "Digital Marketer",
+      rating: "4.5 (120)",
+      price: "Rp 250K",
+      category: "Pemasaran",
+      date: "2026-11-05",
     },
     {
       id: 6,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Kuasai skill baru dengan materi yang mudah dipahami.",
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      price: "Rp 300K",
+      title: "Belajar UI UX Design",
+      description: "Membuat desain aplikasi yang menarik.",
+      image: hero2,
+      avatar: iconpp,
+      author: "Sarah Putri",
+      role: "UI UX Designer",
+      rating: "4.8 (95)",
+      price: "Rp 200K",
+      category: "Digital & Teknologi",
+      date: "2026-11-01",
     },
     {
       id: 7,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar lebih mudah dengan materi yang terstruktur.",
+      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      image: hero,
+      avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      rating: "3.5 (86)",
       price: "Rp 300K",
+      category: "Bisnis Manajemen",
+      date: "2026-11-08",
+    },
+    {
+      id: 8,
+      title: "Digital Marketing untuk Pemula",
+      description: "Pelajari strategi pemasaran digital.",
+      image: newsletter,
+      avatar: ppicon,
+      author: "John Doe",
+      role: "Digital Marketer",
+      rating: "4.5 (120)",
+      price: "Rp 250K",
+      category: "Pemasaran",
+      date: "2026-11-05",
+    },
+    {
+      id: 9,
+      title: "Belajar UI UX Design",
+      description: "Membuat desain aplikasi yang menarik.",
+      image: hero2,
+      avatar: iconpp,
+      author: "Sarah Putri",
+      role: "UI UX Designer",
+      rating: "4.8 (95)",
+      price: "Rp 200K",
+      category: "Digital & Teknologi",
+      date: "2026-11-01",
+    },
+    {
+      id: 10,
+      title: "Big 4 Auditor Financial Analyst",
+      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      image: hero,
+      avatar: iconpp,
+      author: "Jenna Ortega",
+      role: "Senior Accountant",
+      rating: "3.5 (86)",
+      price: "Rp 300K",
+      category: "Bisnis Manajemen",
+      date: "2026-11-08",
+    },
+    {
+      id: 11,
+      title: "Digital Marketing untuk Pemula",
+      description: "Pelajari strategi pemasaran digital.",
+      image: newsletter,
+      avatar: ppicon,
+      author: "John Doe",
+      role: "Digital Marketer",
+      rating: "4.5 (120)",
+      price: "Rp 250K",
+      category: "Pemasaran",
+      date: "2026-11-05",
+    },
+    {
+      id: 12,
+      title: "Belajar UI UX Design",
+      description: "Membuat desain aplikasi yang menarik.",
+      image: hero2,
+      avatar: iconpp,
+      author: "Sarah Putri",
+      role: "UI UX Designer",
+      rating: "4.8 (95)",
+      price: "Rp 200K",
+      category: "Digital & Teknologi",
+      date: "2026-11-01",
     },
   ];
 
+  // LOGIC PAGINATION
+  const cardsPerPage = 10;
+  const totalPages = Math.ceil(videoData.length / cardsPerPage);
+
+  const startIndex = (currentPage - 1) * cardsPerPage;
+
+  const currentVideos = videoData.slice(
+    startIndex,
+    startIndex + cardsPerPage
+  );
+
   return (
     <>
-      <nav className="navbar">
-        <img className="imglogo" src={logo} alt="profile" />
-        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger">
-          ☰
-        </button>
+      {/* NAVBAR */}
+      <Navbar />
 
-        <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
-          <a className="kategori" href="/category">
-            Kategori
-          </a>
-          <a className="login" href="/login">
-            Login
-          </a>
-          <a className="register" href="/register">
-            Register
-          </a>
-        </div>
-      </nav>
-
-      <main className="container">
-        {/* Hero Section */}
+      <main className="main">
+        {/* HERO SECTION */}
         <section className="hero">
           <div className="hero-content">
             <h1>
@@ -120,39 +220,70 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Video Section */}
+        {/* VIDEO SECTION */}
         <section className="video-section" id="video-section">
           <div className="section-title">
             <h2>Koleksi Video Pembelajaran Unggulan</h2>
+
             <p>Jelajahi Dunia Pengetahuan Melalui Pilihan Kami</p>
           </div>
 
+          {/* CATEGORY MENU */}
           <div className="category">
-            <a href="#" className="ative">
+            <a href="#video-section" className="ative">
               Semua Kelas
             </a>
-            <a href="#">Pemasaran</a>
-            <a href="#">Pengembangan Diri</a>
-            <a href="#">Bisnis</a>
+
+            <a href="#video-section">Pemasaran</a>
+
+            <a href="#video-section">Pengembangan Diri</a>
+
+            <a href="#video-section">Bisnis</a>
           </div>
 
-          <div className="video-grid">
-            {videoData.map((item) => (
-              <VideoCard
-                key={item.id}
-                video={video}
-                title={item.title}
-                description={item.description}
-                iconPp={IconPp}
-                author={item.author}
-                role={item.role}
-                price={item.price}
-              />
-            ))}
+          {/* VIDEO CARD */}
+          <div className="category-course-grid">
+            {currentVideos.length > 0 ? (
+              currentVideos.map((item) => (
+                <VideoCard key={item.id} course={item} />
+              ))
+            ) : (
+              <p>Course tidak ditemukan.</p>
+            )}
           </div>
         </section>
 
-        {/* Newsletter Section */}
+        {/* PAGINATION */}
+        <div className="category-pagination">
+          {/* BUTTON PREVIOUS */}
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+          >
+            ‹
+          </button>
+
+          {/* NUMBER PAGE */}
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={currentPage === index + 1 ? "active" : ""}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          {/* BUTTON NEXT */}
+          <button
+            disabled={currentPage === totalPages || totalPages === 0}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            ›
+          </button>
+        </div>
+
+        {/* NEWSLETTER SECTION */}
         <section className="newsletter">
           <div className="newsletter-content">
             <small>NEWSLETTER</small>
@@ -172,68 +303,9 @@ function HomePage() {
           </div>
         </section>
       </main>
-      {/* Footer */}
-           <footer className="footer-container">
-              <div className="boxfooter">
-                <div className="footer1">
-                  <img src={logo} alt="logo" className="imglogo" />
+
       
-                  <p>Platform Video Pembelajaran untuk meningkatkan skill.</p>
-                  <p>Jl. Pendidikan No. 50, Indonesia</p>
-                  <p>+62-812-3456-7890</p>
-                </div>
-      
-                <div className="listfooter">
-                  <div className="footer-column">
-                    <h3 onClick={() => setKategoriOpen(!kategoriOpen)}>
-                      Kategori
-                      <span className="footer-arrow">{kategoriOpen ? "⌃" : "⌄"}</span>
-                    </h3>
-      
-                    <div className={`footer-links ${kategoriOpen ? "active" : ""}`}>
-                      <a href="#">Digital &amp; Teknologi</a>
-                      <a href="#">Pemasaran</a>
-                      <a href="#">Manajemen Bisnis</a>
-                      <a href="#">Pengembangan Diri</a>
-                      <a href="#">Desain</a>
-                    </div>
-                  </div>
-                  <div className="footer-column">
-                    <h3 onClick={() => setPerusahaanOpen(!perusahaanOpen)}>
-                      Perusahaan
-                      <span className="footer-arrow">
-                        {perusahaanOpen ? "⌃" : "⌄"}
-                      </span>
-                    </h3>
-      
-                    <div className={`footer-links ${perusahaanOpen ? "active" : ""}`}>
-                      <a href="#">Tentang Kami</a>
-                      <a href="#">FAQ</a>
-                      <a href="#">Kebijakan Privasi</a>
-                      <a href="#">Bantuan</a>
-                    </div>
-                  </div>
-                  <div className="footer-column">
-                    <h3 onClick={() => setKomunitasOpen(!komunitasOpen)}>
-                      Komunitas
-                      <span className="footer-arrow">
-                        {komunitasOpen ? "⌃" : "⌄"}
-                      </span>
-                    </h3>
-      
-                    <div className={`footer-links ${komunitasOpen ? "active" : ""}`}>
-                      <a href="#">Tips Sukses</a>
-                      <a href="#">Blog</a>
-                      <a href="#">Event</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-      
-              <div className="copyright">
-                <p>© 2026 Copyright Sayur All Rights Reserved.</p>
-              </div>
-            </footer>
+      <Footer />
     </>
   );
 }

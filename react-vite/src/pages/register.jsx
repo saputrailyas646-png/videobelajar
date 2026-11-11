@@ -1,13 +1,14 @@
 import "../assets/styles/register.css";
-import Logo from "../assets/logo.png"
+import Logo from "../assets/logo.png";
 import logoGoogle from "../assets/logos_google-icon.png";
 
 function RegisterPage() {
   return (
     <>
-      <header className="nav-a">
-        <img src={Logo}alt="erorr" className="a-img" />
-      </header>
+      <nav className="navbar">
+        <img src={Logo} alt="logo" className="imglogo" />
+      </nav>{" "}
+      
       <main className="register-container">
         <div className="register-box">
           <h2>Pendaftaran Akun</h2>
@@ -52,18 +53,14 @@ function RegisterPage() {
             </button>
           </form>
           <button className="btn-masuk">
-            <a href="/login" target="_blank" className="a-masuk">
+            <a href="/login" className="a-masuk">
               {" "}
               Masuk{" "}
             </a>
           </button>
           <div className="atau">Atau</div>
           <button className="btn-google">
-            <img
-              src={logoGoogle}
-              alt="logo-google"
-              className="img-daftar"
-            />
+            <img src={logoGoogle} alt="logo-google" className="img-daftar" />
             Daftar dengan Google
           </button>
         </div>

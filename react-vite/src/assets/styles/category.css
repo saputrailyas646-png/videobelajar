@@ -60,12 +60,6 @@
     height: 42px;
 }
 
-.main {
-    width: 100%;
-    min-height: 100vh;
-    padding: 64px 120px;
-    background-color: rgba(255, 247, 215, 0.8);
-}
 
 .heding {
     padding: 20px 0;
@@ -395,10 +389,7 @@
 ========================= */
 
 @media (max-width: 1024px) {
-    .main {
-        padding: 40px 30px;
-    }
-
+   
     .counten {
         gap: 24px;
     }
@@ -476,14 +467,6 @@
         height: 30px;
         font-size: 12px;
         margin-top: 5px;
-    }
-
-    /* MAIN */
-
-    .main {
-        width: 100%;
-        min-height: auto;
-        padding: 24px 16px;
     }
 
     .heding {
