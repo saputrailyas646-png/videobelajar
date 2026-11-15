@@ -1,0 +1,393 @@
+/* HALAMAN METODE PEMBAYARAN */
+
+.metode-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fffdf5;
+    padding: 40px 24px;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+}
+
+.metode-page .metode-container {
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas:
+        "payment product"
+        "summary product";
+
+    align-items: start;
+    gap: 24px;
+}
+
+/* CARD UMUM */
+
+.metode-page .payment-card,
+.metode-page .product-card,
+.metode-page .summary-card {
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-width: 0;
+    width: auto;
+}
+
+/* METODE PEMBAYARAN */
+
+.metode-page .payment-card {
+    grid-area: payment;
+}
+
+.metode-page .payment-card h2,
+.metode-page .summary-card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #222222;
+    margin: 0 0 16px;
+}
+
+/* GROUP PEMBAYARAN */
+
+.metode-page .payment-group {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.metode-page .payment-heading {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+
+    color: #222222;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.metode-page .payment-heading span {
+    color: #777777;
+    font-size: 16px;
+}
+
+/* PILIHAN PEMBAYARAN */
+
+.metode-page .payment-option {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 6px;
+
+    margin-top: 5px;
+
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+}
+
+.metode-page .payment-option:hover {
+    background-color: #f8fff8;
+    border-color: #3ecf4c;
+}
+
+.metode-page .payment-icon {
+    width: 16px;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.metode-page .payment-icon img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.metode-page .payment-name {
+    font-size: 12px;
+    color: #333333;
+}
+
+.metode-page .payment-check {
+    width: 15px;
+    height: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
+
+    background-color: #ff5c35;
+    border-radius: 50%;
+
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* BARIS LOGO KARTU KREDIT/DEBIT */
+
+.metode-page .card-logos {
+    gap: 12px;
+    cursor: default;
+}
+
+.metode-page .card-logos img {
+    height: 16px;
+    width: auto;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.metode-page .card-logos img:hover,
+.metode-page .card-logos img.logo-active {
+    opacity: 1;
+}
+
+/* PRODUK */
+
+.metode-page .product-card {
+    grid-area: product;
+}
+
+.metode-page .product-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.metode-page .product-card h3 {
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: #222222;
+    margin: 12px 0;
+}
+
+.metode-page .product-price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 0;
+    border: none;
+}
+
+.metode-page .product-price span:first-child {
+    color: #3ecf4c;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.metode-page .product-price del {
+    color: #999999;
+    font-size: 11px;
+}
+
+.metode-page .discount {
+    padding: 4px 8px;
+    border-radius: 20px;
+    background-color: rgba(255, 189, 58, 1);
+    color: #ffffff;
+    font-size: 10px;
+}
+
+.metode-page .product-card h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #333333;
+    margin: 14px 0 10px;
+}
+
+.metode-page .product-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    font-size: 11px;
+    color: #777777;
+}
+
+.metode-page .language {
+    font-size: 11px;
+    color: #777777;
+}
+
+/* RINGKASAN PESANAN */
+
+.metode-page .summary-card {
+    grid-area: summary;
+}
+
+.metode-page .summary-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 12px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.metode-page .summary-item p {
+    flex: 1;
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.5;
+    color: #777777;
+}
+
+.metode-page .summary-item span {
+    white-space: nowrap;
+    font-size: 12px;
+    color: #555555;
+}
+
+.metode-page .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px 0;
+}
+
+.metode-page .summary-total strong {
+    font-size: 13px;
+    color: #333333;
+}
+
+.metode-page .summary-total strong:last-child {
+    color: #3ecf4c;
+}
+
+/* BUTTON */
+
+.metode-page .buy-button {
+    width: 100%;
+    min-height: 42px;
+
+    background-color: #3ecf4c;
+    border: none;
+    border-radius: 6px;
+
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.metode-page .buy-button:hover {
+    background-color: #2dbd3b;
+}
+
+/* RESPONSIVE TABLET */
+
+@media (max-width: 900px) {
+    .metode-page .metode-container {
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .metode-page .payment-card,
+    .metode-page .product-card,
+    .metode-page .summary-card {
+        padding: 16px;
+    }
+
+    .metode-page .product-image {
+        height: 130px;
+    }
+}
+
+/* RESPONSIVE MOBILE */
+
+@media (max-width: 600px) {
+    .metode-page {
+        padding: 20px 16px;
+    }
+
+    .metode-page .metode-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .metode-page .product-card {
+        order: 1;
+        width: 100%;
+    }
+
+    .metode-page .payment-card {
+        order: 2;
+        width: 100%;
+    }
+
+    .metode-page .summary-card {
+        order: 3;
+        width: 100%;
+    }
+
+    /* di desain mobile, gambar produk tidak ditampilkan */
+    .metode-page .product-image {
+        display: none;
+    }
+
+    .metode-page .product-card h3 {
+        font-size: 14px;
+    }
+
+    .metode-page .payment-card h2,
+    .metode-page .summary-card h2 {
+        font-size: 15px;
+    }
+
+    .metode-page .payment-heading,
+    .metode-page .payment-option {
+        min-height: 42px;
+    }
+
+    .metode-page .payment-name {
+        font-size: 12px;
+    }
+
+    .metode-page .summary-item p,
+    .metode-page .summary-item span {
+        font-size: 11px;
+    }
+
+    .metode-page .summary-total strong {
+        font-size: 12px;
+    }
+
+    .metode-page .buy-button {
+        min-height: 42px;
+    }
+}

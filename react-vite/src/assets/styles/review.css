@@ -1,0 +1,86 @@
+.rv-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.55);
+}
+.rv-modal {
+  width: min(420px, 100%);
+  padding: 24px;
+  background: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+.rv-modal h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+.rv-modal p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #666;
+}
+.rv-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+.rv-star {
+  padding: 0 2px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #d4d4d4;
+  cursor: pointer;
+}
+.rv-star.on {
+  color: #fcb71e;
+}
+.rv-modal textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  resize: vertical;
+}
+.rv-actions {
+  display: flex;
+  gap: 12px;
+}
+.rv-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.rv-cancel {
+  background: #fff;
+  color: #3ecf4c;
+  border: 1px solid #3ecf4c;
+}
+.rv-submit {
+  background: #3ecf4c;
+  color: #fff;
+  border: none;
+}
+.rv-submit:disabled {
+  background: #cfcfcf;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .rv-actions {
+    flex-direction: column;
+  }
+}

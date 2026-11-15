@@ -1,0 +1,282 @@
+.qz-banner {
+  width: 100%;
+  line-height: 0;
+  background: #aeeaff;
+}
+.qz-banner img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 769 / 264;
+  object-fit: cover;
+}
+
+.qz-body {
+  padding: 24px;
+}
+.qz-body h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+.qz-text {
+  margin: 0 0 12px;
+  color: #666;
+  font-size: 14px;
+}
+.qz-rules {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.qz-last {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  background: #f3f9f3;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.qz-actions {
+  display: flex;
+  gap: 10px;
+}
+.qz-btn,
+.qz-btn-outline {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.qz-btn {
+  background: #3ecf4c;
+  color: #fff;
+  border: none;
+}
+.qz-btn-outline {
+  background: #fff;
+  color: #3ecf4c;
+  border: 1px solid #3ecf4c;
+}
+/* ---------- HALAMAN SOAL ---------- */
+.qz-play {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+}
+.qz-list-title {
+  margin: 0 0 10px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.qz-list-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+.qz-num {
+  aspect-ratio: 1;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.qz-num.answered {
+  background: #e9f9ea;
+  border-color: #3ecf4c;
+  color: #2a9b36;
+}
+.qz-num.current {
+  border: 2px solid #1d6fe8;
+  font-weight: 700;
+}
+
+.qz-question h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.qz-qtext {
+  margin: 0 0 16px;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.qz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.qz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+.qz-option.selected {
+  background: #e9f9ea;
+  border-color: #3ecf4c;
+}
+.qz-radio {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+}
+.qz-option.selected .qz-radio {
+  border-color: #3ecf4c;
+  background: radial-gradient(#3ecf4c 45%, transparent 50%);
+}
+.qz-nav {
+  justify-content: space-between;
+}
+.qz-btn-outline:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---------- MODAL ---------- */
+.qz-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.qz-modal {
+  width: min(420px, 90vw);
+  padding: 24px;
+  background: #fff;
+  border-radius: 10px;
+}
+.qz-modal h3 {
+  margin: 0 0 8px;
+}
+.qz-modal p {
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 14px;
+}
+/* ---------- BANNER TEKS (sebelum gambar dipasang) ---------- */
+.qz-banner-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(160px, 28vw, 300px);
+  line-height: normal;
+}
+.qz-banner-text span {
+  font-size: clamp(36px, 8vw, 88px);
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  -webkit-text-stroke: 3px #1a1a1a;
+  paint-order: stroke fill;
+}
+.qz-banner-text.congrats {
+  background: linear-gradient(180deg, #7fe0d3 0%, #c8f3ee 100%);
+}
+.qz-banner-text.tryagain {
+  background: linear-gradient(180deg, #ffb347 0%, #f6dcb0 100%);
+}
+
+/* ---------- HASIL ---------- */
+.qz-result {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin: 12px 0 20px;
+}
+.qz-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  padding: 16px 24px;
+  border-radius: 10px;
+  color: #fff;
+}
+.qz-score-box.pass {
+  background: #3ecf4c;
+}
+.qz-score-box.fail {
+  background: #ff6a2b;
+}
+.qz-score-box span {
+  font-size: 13px;
+}
+.qz-score-box strong {
+  font-size: 40px;
+  line-height: 1.1;
+}
+.qz-stats {
+  display: flex;
+  gap: 12px;
+}
+.qz-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+.qz-stat strong {
+  font-size: 24px;
+}
+.qz-stat strong.ok {
+  color: #2a9b36;
+}
+.qz-stat strong.bad {
+  color: #e5532a;
+}
+.qz-stat strong.none {
+  color: #888;
+}
+.qz-stat span {
+  font-size: 12px;
+  color: #666;
+}
+.qz-sub {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+.qz-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .qz-result {
+    flex-direction: column;
+  }
+  .qz-stats {
+    justify-content: space-between;
+  }
+  .qz-stat {
+    flex: 1;
+  }
+  .qz-play {
+    grid-template-columns: 1fr;
+  }
+  .qz-list-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .qz-body {
+    padding: 16px;
+  }
+}

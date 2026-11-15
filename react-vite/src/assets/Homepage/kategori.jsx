@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 import Navbar from "../component/navbar";
-import Footer from "../component/footer"
+import Footer from "../component/footer";
 
 import "../styles/category.css";
 import "../styles/global.css";
+
 import VideoCard from "../component/card";
 
 import hero from "../hero.jpg";
@@ -14,15 +15,34 @@ import iconpp from "../iconpp.png";
 import ppicon from "../ppicon.png";
 
 function CategoriPage() {
-  // STATE NAVBAR DAN FOOTER
-
-
   // STATE PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
 
-  // STATE SEARCH DAN FILTER
+  // STATE SEARCH
   const [search, setSearch] = useState("");
+
+  // STATE FILTER KATEGORI
   const [selectedCategory, setSelectedCategory] = useState("Semua");
+
+  // STATE FILTER HARGA
+  const [selectedPrice, setSelectedPrice] = useState("Semua");
+
+  // STATE ACCORDION
+  const [openFilter, setOpenFilter] = useState(() => {
+    if (window.innerWidth > 600) {
+      return {
+        bidang: true,
+        harga: true,
+        durasi: true,
+      };
+    }
+
+    return {
+      bidang: false,
+      harga: false,
+      durasi: false,
+    };
+  });
 
   // DATA VIDEO COURSE
   const videoData = [
@@ -184,17 +204,50 @@ function CategoriPage() {
     },
   ];
 
-  // FILTER SEARCH DAN KATEGORI//
-    const filteredVideos = videoData.filter((item) => {
+  // TOGGLE ACCORDION
+  const toggleFilter = (filterName) => {
+    setOpenFilter((prev) => ({
+      ...prev,
+      [filterName]: !prev[filterName],
+    }));
+  };
+
+  // RESET FILTER
+  const handleReset = () => {
+    setSearch("");
+    setSelectedCategory("Semua");
+    setSelectedPrice("Semua");
+    setCurrentPage(1);
+  };
+
+  // FILTER SEARCH, KATEGORI, DAN HARGA
+  const filteredVideos = videoData.filter((item) => {
     const cocokSearch = item.title.toLowerCase().includes(search.toLowerCase());
-    const cocokKategori = selectedCategory === "Semua" || item.category === selectedCategory;
-    return cocokSearch && cocokKategori;
+
+    const cocokKategori =
+      selectedCategory === "Semua" || item.category === selectedCategory;
+
+    const priceNumber = Number(item.price.replace("Rp ", "").replace("K", ""));
+
+    let cocokHarga = true;
+
+    if (selectedPrice === "under200") {
+      cocokHarga = priceNumber < 200;
+    } else if (selectedPrice === "200-300") {
+      cocokHarga = priceNumber >= 200 && priceNumber <= 300;
+    } else if (selectedPrice === "above300") {
+      cocokHarga = priceNumber > 300;
+    }
+
+    return cocokSearch && cocokKategori && cocokHarga;
   });
 
   // PAGINATION
   const cardsPerPage = 10;
   const totalPages = Math.ceil(filteredVideos.length / cardsPerPage);
+
   const startIndex = (currentPage - 1) * cardsPerPage;
+
   const currentVideos = filteredVideos.slice(
     startIndex,
     startIndex + cardsPerPage,
@@ -202,51 +255,147 @@ function CategoriPage() {
 
   return (
     <>
-      <Navbar/>
-      
+      <Navbar />
+
       <main className="main">
         <div className="heding">
           <h1>Koleksi Video Pembelajaran Unggulan</h1>
           <p>Jelajahi Dunia Pengetahuan Melalui Pilihan Kami!</p>
         </div>
+
         <div className="counten">
-          <div className="sidebarbox">
+          {/* SIDEBAR FILTER */}
+          <aside className="sidebarbox">
             <div className="span-side">
               <span>Filter</span>
-              <span className="reset">Reset</span>
+
+              <button type="button" className="reset" onClick={handleReset}>
+                Reset
+              </button>
             </div>
+
             <div className="menu-sidebar">
+              {/* BIDANG STUDI */}
               <div className="menu">
-                <h3>Bidang study</h3>
-                <div className="listmenu">
-                  <p>Pemasaran</p>
-                  <p>Digital & Teknologi</p>
-                  <p>Pengembangan Diri</p>
-                  <p>Bisnis Manajemen</p>
-                </div>
-              </div>
-              <div className="menu">
-                <h3>Harga</h3>
-                <div className="listmenu">
-                  <p>Pemasaran</p>
-                  <p>Digital & Teknologi</p>
-                  <p>Pengembangan Diri</p>
-                  <p>Bisnis Manajemen</p>
-                </div>
+                <button
+                  type="button"
+                  className="filter-heading"
+                  onClick={() => toggleFilter("bidang")}
+                >
+                  <span>Bidang Studi</span>
+                  <span
+                    className={`filter-arrow ${openFilter.bidang ? "open" : ""}`}
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+                {openFilter.bidang && (
+                  <div className="listmenu">
+                    {[
+                      "Pemasaran",
+                      "Digital & Teknologi",
+                      "Pengembangan Diri",
+                      "Bisnis Manajemen",
+                    ].map((category) => (
+                      <label className="filter-option" key={category}>
+                        <input
+                          type="checkbox"
+                          checked={selectedCategory === category}
+                          onChange={() => {
+                            setSelectedCategory(
+                              selectedCategory === category
+                                ? "Semua"
+                                : category,
+                            );
+                            setCurrentPage(1);
+                          }}
+                        />
+
+                        <span>{category}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
               </div>
 
+              {/* HARGA */}
               <div className="menu">
-                <h3>Durasi</h3>
-                <div className="listmenu">
-                  <p>Kurang dari 4 jam</p>
-                  <p>4-8 Jam</p>
-                  <p>Lebih dari 8 jam</p>
-                </div>
+                <button
+                  type="button"
+                  className="filter-heading"
+                  onClick={() => toggleFilter("harga")}
+                >
+                  <span>Harga</span>
+                  <span
+                    className={`filter-arrow ${openFilter.harga ? "open" : ""}`}
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+                {openFilter.harga && (
+                  <div className="listmenu">
+                    {[
+                      { label: "Di bawah Rp 200K", value: "under200" },
+                      { label: "Rp 200K – Rp 300K", value: "200-300" },
+                      { label: "Di atas Rp 300K", value: "above300" },
+                    ].map((price) => (
+                      <label className="filter-option" key={price.value}>
+                        <input
+                          type="checkbox"
+                          checked={selectedPrice === price.value}
+                          onChange={() => {
+                            setSelectedPrice(
+                              selectedPrice === price.value
+                                ? "Semua"
+                                : price.value,
+                            );
+                            setCurrentPage(1);
+                          }}
+                        />
+
+                        <span>{price.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* DURASI */}
+              <div className="menu">
+                <button
+                  type="button"
+                  className="filter-heading"
+                  onClick={() => toggleFilter("durasi")}
+                >
+                  <span>Durasi</span>
+                  <span
+                    className={`filter-arrow ${openFilter.durasi ? "open" : ""}`}
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+                {openFilter.durasi && (
+                  <div className="listmenu">
+                    {["Kurang dari 4 jam", "4–8 Jam", "Lebih dari 8 jam"].map(
+                      (duration) => (
+                        <label className="filter-option" key={duration}>
+                          <input type="checkbox" />
+
+                          <span>{duration}</span>
+                        </label>
+                      ),
+                    )}
+                  </div>
+                )}
               </div>
             </div>
-          </div>
+          </aside>
 
-          <div className="category-course-area">
+          {/* AREA COURSE */}
+          <section className="category-course-area">
             <div className="course-tools">
               <select
                 value={selectedCategory}
@@ -275,6 +424,7 @@ function CategoriPage() {
                 <button type="button">🔍</button>
               </div>
             </div>
+
             <div className="category-course-grid">
               {currentVideos.length > 0 ? (
                 currentVideos.map((item) => (
@@ -311,11 +461,11 @@ function CategoriPage() {
                 ›
               </button>
             </div>
-          </div>
+          </section>
         </div>
       </main>
-      
-      <Footer/>
+
+      <Footer />
     </>
   );
 }

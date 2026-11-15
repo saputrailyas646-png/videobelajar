@@ -1,22 +1,4 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
-
-/* GLOBAL */
-body {
-  width: 100%;
-  min-height: 100vh;
-  background: #f5f5f5;
-  color: #222;
-  overflow-x: hidden;
-}
-
-/* CONTAINER */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
 
 /* HERO */
 .hero {
@@ -107,95 +89,69 @@ body {
   padding-bottom: 7px;
 }
 
-/* VIDEO GRID */
-.video-grid {
+/* =========================
+   SLIDER
+========================= */
+.slider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slider-page {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* =========================
+   GRID (3 kolom x 4 baris per slide)
+   Style card ada di card.css
+========================= */
+.category-course-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
-.video-card > video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-  border-radius: 8px;
+/* paksa 3 kolom di dalam slider (menimpa aturan lama kalau ada) */
+.slider .category-course-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 
-/* CARD FOOTER */
-.card-footer {
+/* PAGINATION */
+.category-pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-top: auto;
-  gap: 10px;
+  gap: 8px;
+  margin-top: 30px;
 }
 
-.rating {
-  padding-left: 36px;
+.category-pagination button {
+  min-width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
 }
 
-.price {
-  white-space: nowrap;
+.category-pagination button.active {
+  background: #32ce4b;
+  border-color: #32ce4b;
+  color: #fff;
 }
 
-/* VIDEO CONTENT */
-.video-content {
-  padding: 12px;
-}
-
-.video-content h3 {
-  font-size: 13px;
-  line-height: 1.4;
-  margin-bottom: 6px;
-}
-
-.video-content p {
-  font-size: 10px;
-  line-height: 1.5;
-  color: #777;
-}
-
-/* AUTHOR */
-.author {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 10px;
-}
-
-.author img {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.author span {
-  display: block;
-  font-size: 10px;
-}
-
-.author small {
-  display: block;
-  font-size: 8px;
-  color: #888;
-}
-
-/* RATING */
-.rating {
-  margin-top: 8px;
-  font-size: 9px;
-}
-
-/* PRICE */
-.price {
-  display: block;
-  text-align: right;
-  color: #20bd3c;
-  font-size: 13px;
-  margin-top: 6px;
+.category-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* NEWSLETTER */
@@ -208,7 +164,7 @@ body {
       rgba(0, 0, 0, .65),
       rgba(0, 0, 0, .65)
     ),
-    url("../image/newsletter.jpg");
+    url("../newsletter.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -254,17 +210,6 @@ body {
   color: white;
 }
 
-/* TABLET */
-@media (max-width: 1200px) {
-  .container {
-    padding: 0 20px;
-  }
-
-  .video-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
 /* RESPONSIVE TABLET */
 @media (max-width: 900px) {
   .hero {
@@ -272,15 +217,15 @@ body {
     margin-top: 20px;
   }
 
-  .video-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .category-course-grid,
+  .slider .category-course-grid {
     gap: 15px;
   }
 }
 
 /* RESPONSIVE MOBILE */
 @media (max-width: 600px) {
-  .container {
+  .main {
     padding: 0 12px;
   }
 
@@ -313,40 +258,49 @@ body {
     margin-bottom: 15px;
   }
 
-  .video-grid {
+  /* GRID MOBILE: 1 kolom */
+  .category-course-grid,
+  .slider .category-course-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
 
-  .video-card > img {
-    aspect-ratio: 16 / 9;
+  /* CARD MOBILE: tampilan horizontal (khusus page Home) */
+  .category-course-grid .video-card {
+    flex-direction: row;
+    align-items: center;
+    max-width: none;
+    min-height: 147px;
+    padding: 16px;
+    gap: 12px;
   }
 
-  .video-content h3 {
-    font-size: 13px;
+  .category-course-grid .video-card-image {
+    width: 87px;
+    height: 87px;
+    flex: 0 0 87px;
+    aspect-ratio: auto;
   }
 
-  .video-content p {
-    font-size: 10px;
-  }
-
-  .newsletter {
-    min-height: 200px;
-    margin-top: 30px;
-    padding: 25px 15px;
-  }
-
-  .newsletter form {
-    flex-direction: column;
+  .category-course-grid .video-card-content {
     gap: 8px;
   }
 
-  .newsletter input {
-    width: 100%;
+  .category-course-grid .video-card-content h3 {
+    font-size: 16px;
+    line-height: 1.3;
   }
 
-  .newsletter button {
-    width: 100%;
-    height: 35px;
+  .category-course-grid .video-card-desc {
+    display: none;
+  }
+
+  .category-course-grid .video-card-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .category-course-grid .author-info p {
+    font-size: 14px;
   }
 }

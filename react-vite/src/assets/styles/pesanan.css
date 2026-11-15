@@ -1,0 +1,539 @@
+
+/* PAGE */
+
+.pesanan-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #fffdf5;
+  font-family: "Lato", sans-serif;
+  color: #333;
+  padding: 32px 0;
+  box-sizing: border-box;
+}
+
+.pesanan-page * {
+  box-sizing: border-box;
+}
+
+/* LAYOUT */
+
+.pesanan-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* SIDEBAR */
+
+.pesanan-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.sidebar-heading {
+  margin-bottom: 20px;
+}
+
+.sidebar-heading h2 {
+  font-size: 16px;
+  margin: 0 0 5px;
+  font-weight: 700;
+}
+
+.sidebar-heading p {
+  font-size: 10px;
+  color: #999;
+  margin: 0;
+}
+
+.sidebar-menu {
+  width: 100%;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-link {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  background: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #888;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebar-link span {
+  font-size: 13px;
+}
+
+.sidebar-link.active {
+  background: #fff7e5;
+  border-color: #ffca62;
+  color: #ffab18;
+  font-weight: 700;
+}
+
+/* CONTENT */
+
+.pesanan-content {
+  flex: 1;
+  min-width: 0;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 14px;
+}
+
+/* TABS */
+
+.pesanan-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pesanan-tab {
+  height: 32px;
+  padding: 0 5px;
+  background: white;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #888;
+  font-size: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pesanan-tab.active {
+  color: #ff5b35;
+  border-bottom-color: #ff5b35;
+  font-weight: 700;
+}
+
+/* SEARCH */
+
+.pesanan-search {
+  width: 130px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-left: auto;
+  padding: 0 8px;
+}
+
+.pesanan-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-size: 10px;
+  background: transparent;
+}
+
+.pesanan-search span {
+  font-size: 15px;
+  color: #777;
+}
+
+/* SORT */
+
+.pesanan-sort {
+  height: 30px;
+  width: 85px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 10px;
+  color: #777;
+  background: white;
+  outline: none;
+}
+
+/* ORDER CARD */
+
+.pesanan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pesanan-card {
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  overflow: hidden;
+  background: white;
+}
+
+/* CARD HEADER */
+
+.pesanan-card-header {
+  min-height: 34px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fcf7;
+  border-bottom: 1px solid #eee;
+  font-size: 9px;
+  flex-wrap: wrap;
+}
+
+.invoice-info,
+.payment-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.invoice-info span,
+.payment-date span:first-child {
+  color: #888;
+}
+
+.invoice-info a {
+  color: #1689e8;
+  text-decoration: underline;
+}
+
+.payment-date {
+  color: #888;
+}
+
+.pesanan-status {
+  margin-left: auto;
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.pesanan-status.success {
+  color: #35cc4b;
+  background: #e5f9e8;
+}
+
+.pesanan-status.failed {
+  color: #ff5b35;
+  background: #ffebe6;
+}
+
+.pesanan-status.pending {
+  color: #e7a500;
+  background: #fff5d9;
+}
+
+/* PRODUCT */
+
+.pesanan-product {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.product-info img {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.product-info p {
+  font-size: 10px;
+  line-height: 1.5;
+  margin: 0;
+  color: #333;
+}
+
+.product-price {
+  width: 90px;
+  flex-shrink: 0;
+  border-left: 1px solid #eee;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-price span {
+  color: #888;
+  font-size: 9px;
+}
+
+.product-price strong {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* TOTAL */
+
+.pesanan-total {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: #f8fcf7;
+  border-top: 1px solid #eee;
+  font-size: 9px;
+}
+
+.pesanan-total span {
+  color: #888;
+}
+
+.pesanan-total strong {
+  color: #35cc4b;
+}
+
+/* EMPTY */
+
+.pesanan-empty {
+  padding: 30px;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+}
+
+/* PAGINATION */
+
+.pesanan-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.pesanan-pagination button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background: white;
+  color: #777;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.pesanan-pagination button.active {
+  background: #ffbd35;
+  border-color: #ffbd35;
+  color: white;
+}
+
+.pesanan-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.pesanan-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 10px;
+  border-top: 1px solid #eee;
+}
+
+.pesanan-action-btn {
+  height: 28px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3ecf4c;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pesanan-action-btn:hover {
+  background-color: #2fb83d;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .pesanan-container {
+    width: 94%;
+    gap: 14px;
+  }
+
+  .pesanan-sidebar {
+    width: 170px;
+  }
+
+  .pesanan-content {
+    padding: 10px;
+  }
+
+  .pesanan-tabs {
+    gap: 6px;
+  }
+
+  .pesanan-search {
+    width: 100px;
+  }
+
+  .pesanan-sort {
+    width: 75px;
+  }
+
+  .pesanan-card-header {
+    gap: 6px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .pesanan-page {
+    padding: 16px 0 24px;
+  }
+
+  .pesanan-container {
+    width: 92%;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pesanan-sidebar {
+    width: 100%;
+  }
+
+  .sidebar-heading {
+    margin-bottom: 12px;
+  }
+
+  .sidebar-heading h2 {
+    font-size: 14px;
+  }
+
+  .sidebar-menu {
+    padding: 8px;
+  }
+
+  .sidebar-link {
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .pesanan-content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .pesanan-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding-bottom: 10px;
+  }
+
+  .pesanan-tab {
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .pesanan-search {
+    width: 100%;
+    height: 32px;
+    margin-left: 0;
+    grid-column: span 2;
+  }
+
+  .pesanan-sort {
+    width: 100%;
+    height: 32px;
+    font-size: 10px;
+  }
+
+  .pesanan-card-header {
+    padding: 8px;
+    gap: 5px;
+    font-size: 8px;
+  }
+
+  .invoice-info,
+  .payment-date {
+    flex-wrap: wrap;
+  }
+
+  .pesanan-status {
+    margin-left: 0;
+  }
+
+  .pesanan-product {
+    padding: 8px;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .product-info {
+    gap: 6px;
+  }
+
+  .product-info img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .product-info p {
+    font-size: 9px;
+  }
+
+  .product-price {
+    width: 75px;
+    padding-left: 7px;
+  }
+
+  .product-price span {
+    font-size: 8px;
+  }
+
+  .product-price strong {
+    font-size: 9px;
+  }
+
+  .pesanan-total {
+    font-size: 8px;
+  }
+
+  .pesanan-pagination {
+    gap: 3px;
+  }
+
+  .pesanan-pagination button {
+    width: 23px;
+    height: 23px;
+  }
+}

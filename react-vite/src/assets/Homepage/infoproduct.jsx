@@ -1,79 +1,99 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { getCurrentUser } from "../utils/auth";
+import { getCourseById } from "./courseData";
 
 import Navbar from "../component/navbar";
 import Footer from "../component/footer";
-
-import tutorImage from "../iconpp.png";
 
 import "../styles/information.css";
 
 function InformationProduct() {
   const [openIndex, setOpenIndex] = useState(0);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
+  const course = getCourseById(id);
 
-  const curriculumData = [
-    {
-      title: "Introduction to HR",
-      lessons: [
-        {
-          title: "Introduction to HR",
-          duration: "12 Menit",
+  // TOMBOL BELI SEKARANG
+  const handleBuy = () => {
+    const user = getCurrentUser();
+
+    if (!user) {
+      navigate("/login", {
+        state: {
+          from: `/information/${id}`,
         },
-        {
-          title: "Introduction to HR",
-          duration: "12 Menit",
-        },
-        {
-          title: "Introduction to HR",
-          duration: "12 Menit",
-        },
-      ],
-    },
-    {
-      title: "Introduction to HR",
-      lessons: [
-        {
-          title: "Introduction to HR",
-          duration: "12 Menit",
-        },
-        {
-          title: "Introduction to HR",
-          duration: "12 Menit",
-        },
-      ],
-    },
-  ];
+      });
+      return;
+    }
+
+    navigate(`/metode/${id}`);
+  };
+
+  // KOMPONEN TUTOR
+  const TutorCard = () => (
+    <div className="card-tutor">
+      <div className="tutor-profile">
+        <img src={course.avatar} alt={course.tutor} />
+
+        <div>
+          <h4>{course.tutor}</h4>
+          <p>{course.tutorRole}</p>
+        </div>
+      </div>
+
+      <p className="tutor-description">{course.tutorDescription}</p>
+    </div>
+  );
+
+  // KOMPONEN REVIEW
+  const ReviewCard = () => (
+    <div className="card-tutor">
+      <div className="tutor-profile">
+        <img src={course.avatar} alt={course.author} />
+
+        <div>
+          <h4>{course.author}</h4>
+          <p>{course.role}</p>
+        </div>
+      </div>
+
+      <p className="tutor-description">
+        Materi pembelajaran sangat menarik dan mudah dipahami. Course ini
+        membantu meningkatkan keterampilan saya.
+      </p>
+
+      <div className="video-card-rating">
+        <span className="stars">★★★★★</span>
+      </div>
+    </div>
+  );
 
   return (
     <>
       <Navbar />
 
       <main className="main">
+        {/* BREADCRUMB */}
         <p>
           <span>Beranda /</span>
-          <span>Desain /</span>
-          Gapai Karier Impianmu sebagai Seorang UI/UX Designer & Product
-          Manager.
+          <span>{course.category} /</span>
+          {course.title}
         </p>
 
         {/* HERO */}
         <section className="hero">
           <div className="hero-">
-            <h1>
-              Gapai Karier Impianmu sebagai Seorang UI/UX Designer & Product
-              Manager.
-            </h1>
+            <h1>{course.title}</h1>
 
             <p>
               Belajar bersama tutor profesional di Video Course. Kapanpun, di
               manapun.
             </p>
 
-            <p>⭐⭐⭐⭐⭐</p>
+            <p>{course.rating}</p>
           </div>
         </section>
 
@@ -85,18 +105,7 @@ function InformationProduct() {
             <div className="box-deskripsion">
               <span>Deskripsi</span>
 
-              <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                est saepe inventore ducimus temporibus quod non delectus ad
-                labore atque, ipsum perspiciatis? Eum, voluptatibus temporibus
-                esse necessitatibus, amet nostrum repellendus delectus, est
-                culpa quam reiciendis magnam fugiat incidunt. Excepturi, soluta
-                illum iste error ipsam saepe atque ut quas, ullam quidem sequi
-                nemo maxime deserunt vero et labore excepturi impedit, tenetur
-                libero magnam minus. Iste molestiae dolores maiores sapiente.
-                Quod ut excepturi labore laborum rem aliquam, praesentium neque
-                earum?
-              </div>
+              <div>{course.description}</div>
             </div>
 
             {/* TUTOR */}
@@ -104,43 +113,8 @@ function InformationProduct() {
               <span>Belajar bersama Tutor Profesional</span>
 
               <div className="mini-card">
-                {/* CARD KIRI */}
-                <div className="card-tutor">
-                  <div className="tutor-profile">
-                    <img src={tutorImage} alt="Tutor" />
-
-                    <div>
-                      <h4>Gregorius Edrik Lawanto</h4>
-                      <p>Senior Talent Acquisition di WingsGroup</p>
-                    </div>
-                  </div>
-
-                  <p className="tutor-description">
-                    Berkarier di bidang HR selama lebih dari 3 tahun. Saat ini
-                    bekerja sebagai Senior Talent Acquisition Specialist di
-                    Wings Group Indonesia (Sayap Mas Utama) selama hampir 1
-                    tahun.
-                  </p>
-                </div>
-
-                {/* CARD KANAN */}
-                <div className="card-tutor">
-                  <div className="tutor-profile">
-                    <img src={tutorImage} alt="Tutor" />
-
-                    <div>
-                      <h4>Gregorius Edrik Lawanto</h4>
-                      <p>Senior Talent Acquisition di WingsGroup</p>
-                    </div>
-                  </div>
-
-                  <p className="tutor-description">
-                    Berkarier di bidang HR selama lebih dari 3 tahun. Saat ini
-                    bekerja sebagai Senior Talent Acquisition Specialist di
-                    Wings Group Indonesia (Sayap Mas Utama) selama hampir 1
-                    tahun.
-                  </p>
-                </div>
+                <TutorCard />
+                <TutorCard />
               </div>
             </div>
 
@@ -148,9 +122,8 @@ function InformationProduct() {
             <section className="curriculum">
               <h3>Kamu akan Mempelajari</h3>
 
-              {curriculumData.map((item, index) => (
+              {course.curriculum.map((item, index) => (
                 <div className="accordion" key={index}>
-                  {/* HEADER ACCORDION */}
                   <button
                     className="accordion-header"
                     onClick={() =>
@@ -162,7 +135,6 @@ function InformationProduct() {
                     <span>{openIndex === index ? "⌃" : "⌄"}</span>
                   </button>
 
-                  {/* CONTENT ACCORDION */}
                   {openIndex === index && (
                     <div className="accordion-content">
                       {item.lessons.map((lesson, lessonIndex) => (
@@ -181,129 +153,74 @@ function InformationProduct() {
               ))}
             </section>
 
+            {/* RATING DAN REVIEW */}
             <div className="box-deskripsion">
               <span>Rating dan Review</span>
 
               <div className="mini-card">
-                {/* CARD KIRI */}
-                <div className="card-tutor">
-                  <div className="tutor-profile">
-                    <img src={tutorImage} alt="Tutor" />
-
-                    <div>
-                      <h4>Gregorius Edrik Lawanto</h4>
-                      <p>Senior Talent Acquisition di WingsGroup</p>
-                    </div>
-                  </div>
-
-                  <p className="tutor-description">
-                    Berkarier di bidang HR selama lebih dari 3 tahun. Saat ini
-                    bekerja sebagai Senior Talent Acquisition Specialist di
-                    Wings Group Indonesia (Sayap Mas Utama) selama hampir 1
-                    tahun.
-                  </p>
-                  <div className="video-card-rating">
-                    <span className="stars">★★★</span>
-                    <span className="empty-stars">★★</span>
-                  </div>
-                </div>
-
-                {/* CARD KANAN */}
-                <div className="card-tutor">
-                  <div className="tutor-profile">
-                    <img src={tutorImage} alt="Tutor" />
-
-                    <div>
-                      <h4>Gregorius Edrik Lawanto</h4>
-                      <p>Senior Talent Acquisition di WingsGroup</p>
-                    </div>
-                  </div>
-
-                  <p className="tutor-description">
-                    Berkarier di bidang HR selama lebih dari 3 tahun. Saat ini
-                    bekerja sebagai Senior Talent Acquisition Specialist di
-                    Wings Group Indonesia (Sayap Mas Utama) selama hampir 1
-                    tahun.
-                  </p>
-                  <div className="video-card-rating">
-                    <span className="stars">★★★</span>
-                    <span className="empty-stars">★★</span>
-                  </div>
-                </div>
+                <ReviewCard />
+                <ReviewCard />
               </div>
             </div>
           </div>
 
           {/* CONTENT KANAN */}
           <div className="conten-kanan">
-            <div className="conten-kanan">
-              <div className="card-purchase">
-                {/* THUMBNAIL */}
-                {/* <div className="purchase-thumbnail">
-                  <img src={tutorImage} alt="Preview course" />
-                </div> */}
+            <div className="card-purchase">
+              <div className="purchase-content">
+                <h3 className="purchase-title">{course.title}</h3>
 
-                {/* CONTENT */}
-                <div className="purchase-content">
-                  <h3 className="purchase-title">
-                    Gapai Karier Impianmu sebagai Seorang UI/UX Designer &
-                    Product Manager.
-                  </h3>
+                {/* PRICE */}
+                <div className="purchase-price">
+                  <div className="price-group">
+                    <span className="price-current">{course.price}</span>
 
-                  {/* PRICE */}
-                  <div className="purchase-price">
-                    <div className="price-group">
-                      <span className="price-current">Rp 250K</span>
-                      <span className="price-old">Rp 500K</span>
-                    </div>
-
-                    <span className="discount-badge">Diskon 50%</span>
+                    <span className="price-old">{course.oldPrice}</span>
                   </div>
 
-                  <p className="purchase-promo">
-                    Penawaran spesial tersisa 2 hari lagi!
-                  </p>
+                  <span className="discount-badge">Diskon 50%</span>
+                </div>
 
-                  {/* BUTTONS */}
-                  <div className="purchase-buttons">
-                    <button
-                      className="btn-buy"
-                      onClick={() => navigate("/login")}
-                    >
-                      Beli Sekarang
-                    </button>
+                <p className="purchase-promo">
+                  Penawaran spesial tersisa 2 hari lagi!
+                </p>
 
-                    <button className="btn-share">Bagikan Kelas</button>
+                {/* BUTTONS */}
+                <div className="purchase-buttons">
+                  <button className="btn-buy" onClick={handleBuy}>
+                    Beli Sekarang
+                  </button>
+
+                  <button className="btn-share">Bagikan Kelas</button>
+                </div>
+
+                {/* CLASS BENEFITS */}
+                <div className="purchase-includes">
+                  <h4>Kelas Ini Sudah Termasuk</h4>
+
+                  <div className="includes-grid">
+                    {[
+                      { icon: "♧", text: "Ujian Akhir" },
+                      { icon: "▣", text: "49 Video" },
+                      { icon: "▤", text: "7 Dokumen" },
+                      { icon: "♙", text: "Sertifikat" },
+                      { icon: "♧", text: "Pretest" },
+                    ].map((item, index) => (
+                      <div className="includes-item" key={index}>
+                        <span>{item.icon}</span>
+                        <p>{item.text}</p>
+                      </div>
+                    ))}
                   </div>
+                </div>
 
-                  {/* CLASS BENEFITS */}
-                  <div className="purchase-includes">
-                    <h4>Kelas Ini Sudah Termasuk</h4>
+                {/* LANGUAGE */}
+                <div className="purchase-language">
+                  <h4>Bahasa Pengantar</h4>
 
-                    <div className="includes-grid">
-                      {[
-                        { icon: "♧", text: "Ujian Akhir" },
-                        { icon: "▣", text: "49 Video" },
-                        { icon: "▤", text: "7 Dokumen" },
-                        { icon: "♙", text: "Sertifikat" },
-                        { icon: "♧", text: "Pretest" },
-                      ].map((item, index) => (
-                        <div className="includes-item" key={index}>
-                          <span>{item.icon}</span>
-                          <p>{item.text}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* LANGUAGE */}
-                  <div className="purchase-language">
-                    <h4>Bahasa Pengantar</h4>
-
-                    <div className="language-item">
-                      <span>◎</span>
-                      <p>Bahasa Indonesia</p>
-                    </div>
+                  <div className="language-item">
+                    <span>◎</span>
+                    <p>Bahasa Indonesia</p>
                   </div>
                 </div>
               </div>

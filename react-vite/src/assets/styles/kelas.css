@@ -1,0 +1,648 @@
+
+/* PAGE */
+
+.kelas-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #fffdf5;
+  font-family: "Lato", sans-serif;
+  color: #333;
+  padding: 32px 0;
+  box-sizing: border-box;
+}
+
+.kelas-page * {
+  box-sizing: border-box;
+}
+
+/* LAYOUT */
+
+.kelas-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* SIDEBAR */
+
+.kelas-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.kelas-sidebar-heading {
+  margin-bottom: 20px;
+}
+
+.kelas-sidebar-heading h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+
+.kelas-sidebar-heading p {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #999;
+  margin: 0;
+}
+
+.kelas-sidebar-menu {
+  width: 100%;
+  padding: 10px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kelas-sidebar-link {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: white;
+  color: #888;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kelas-sidebar-link span {
+  font-size: 13px;
+}
+
+.kelas-sidebar-link.active {
+  background: #fff7e5;
+  border-color: #ffca62;
+  color: #ffab18;
+  font-weight: 700;
+}
+
+/* CONTENT */
+
+.kelas-content {
+  flex: 1;
+  min-width: 0;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 14px;
+}
+
+/* TABS */
+
+.kelas-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.kelas-tab {
+  height: 32px;
+  padding: 0 5px;
+  background: white;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #888;
+  font-size: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.kelas-tab.active {
+  color: #ff5b35;
+  border-bottom-color: #ff5b35;
+  font-weight: 700;
+}
+
+/* SEARCH */
+
+.kelas-search {
+  width: 130px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-left: auto;
+  padding: 0 8px;
+}
+
+.kelas-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 10px;
+}
+
+.kelas-search span {
+  font-size: 15px;
+  color: #777;
+}
+
+/* LIST */
+
+.kelas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* CARD */
+
+.kelas-card {
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+}
+
+/* CARD HEADER */
+
+.kelas-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #f8fcf7;
+  border-bottom: 1px solid #eee;
+  font-size: 10px;
+  color: #888;
+}
+
+.kelas-status {
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.kelas-status.ongoing {
+  background: #fff2d5;
+  color: #e6a000;
+}
+
+.kelas-status.finished {
+  background: #e5f9e8;
+  color: #35cc4b;
+}
+
+/* CARD BODY */
+
+.kelas-card-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+}
+
+.kelas-thumbnail {
+  width: 100px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.kelas-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kelas-card-info h3 {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 5px;
+}
+
+.kelas-card-info > p {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #888;
+  margin: 0 0 8px;
+}
+
+/* TUTOR */
+
+.kelas-tutor {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.kelas-tutor img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.kelas-tutor div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kelas-tutor strong {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.kelas-tutor span {
+  font-size: 9px;
+  color: #888;
+}
+
+/* META */
+
+.kelas-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 9px;
+  color: #888;
+}
+
+/* PROGRESS */
+
+.kelas-progress-section {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  background: #fbfefb;
+}
+
+.kelas-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.kelas-progress-info span {
+  color: #888;
+}
+
+.kelas-progress-info strong {
+  color: #35cc4b;
+}
+
+.kelas-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.kelas-progress-fill {
+  height: 100%;
+  background: #35cc4b;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* BUTTONS */
+
+.kelas-card-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.kelas-card-buttons button {
+  min-width: 120px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.kelas-outline-button {
+  background: white;
+  border: 1px solid #35cc4b;
+  color: #35cc4b;
+}
+
+.kelas-outline-button:hover {
+  background: #f0fff2;
+}
+
+.kelas-continue-button,
+.kelas-detail-button {
+  background: #35cc4b;
+  border: 1px solid #35cc4b;
+  color: white;
+}
+
+.kelas-continue-button:hover,
+.kelas-detail-button:hover {
+  background: #27b83d;
+}
+
+/* EMPTY */
+
+.kelas-empty {
+  padding: 30px;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+}
+
+/* PAGINATION */
+
+.kelas-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.kelas-pagination button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background: white;
+  color: #777;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kelas-pagination button.active {
+  background: #ffbd35;
+  border-color: #ffbd35;
+  color: white;
+}
+
+.kelas-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* SERTIFIKAT */
+
+.sertifikat-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.sertifikat-modal {
+  width: min(100%, 760px);
+  max-height: 95vh;
+  overflow: auto;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.sertifikat-paper {
+  border: 8px double #ffbd35;
+  padding: 36px 24px;
+  text-align: center;
+  background: #fffdf5;
+}
+
+.sertifikat-paper p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.sertifikat-brand {
+  font-size: 22px !important;
+  font-weight: 700;
+  color: #ffab18 !important;
+}
+
+.sertifikat-paper h2 {
+  margin: 14px 0;
+  font-size: 28px;
+}
+
+.sertifikat-paper h3 {
+  margin: 10px 0;
+  font-size: 26px;
+  color: #ff5b35;
+}
+
+.sertifikat-paper h4 {
+  margin: 10px 0 18px;
+  font-size: 18px;
+}
+
+.sertifikat-date {
+  margin-top: 20px !important;
+}
+
+.sertifikat-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* saat dicetak: hanya sertifikat yang tampil */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .sertifikat-print,
+  .sertifikat-print * {
+    visibility: visible;
+  }
+
+  .sertifikat-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .kelas-container {
+    width: 94%;
+    gap: 14px;
+  }
+
+  .kelas-sidebar {
+    width: 170px;
+  }
+
+  .kelas-content {
+    padding: 10px;
+  }
+
+  .kelas-tabs {
+    gap: 6px;
+  }
+
+  .kelas-search {
+    width: 100px;
+  }
+
+  .kelas-thumbnail {
+    width: 85px;
+    height: 80px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .kelas-page {
+    padding: 16px 0 24px;
+  }
+
+  .kelas-container {
+    width: 92%;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .kelas-sidebar {
+    width: 100%;
+  }
+
+  .kelas-sidebar-heading {
+    margin-bottom: 12px;
+  }
+
+  .kelas-sidebar-heading h2 {
+    font-size: 14px;
+  }
+
+  .kelas-sidebar-menu {
+    padding: 8px;
+  }
+
+  .kelas-sidebar-link {
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .kelas-content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .kelas-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding-bottom: 10px;
+  }
+
+  .kelas-tab {
+    height: 30px;
+    font-size: 9px;
+  }
+
+  .kelas-search {
+    width: 100%;
+    height: 32px;
+    margin-left: 0;
+    grid-column: span 3;
+  }
+
+  .kelas-card-header {
+    padding: 8px;
+    font-size: 9px;
+  }
+
+  .kelas-card-body {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .kelas-thumbnail {
+    width: 75px;
+    height: 80px;
+  }
+
+  .kelas-card-info h3 {
+    font-size: 10px;
+  }
+
+  .kelas-card-info > p {
+    font-size: 9px;
+  }
+
+  .kelas-tutor img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .kelas-tutor strong {
+    font-size: 9px;
+  }
+
+  .kelas-tutor span {
+    font-size: 8px;
+  }
+
+  .kelas-meta {
+    gap: 6px;
+    font-size: 8px;
+  }
+
+  .kelas-progress-section {
+    padding: 8px;
+  }
+
+  .kelas-card-buttons {
+    gap: 6px;
+  }
+
+  .kelas-card-buttons button {
+    min-width: 0;
+    flex: 1;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 8px;
+  }
+
+  .kelas-pagination {
+    gap: 3px;
+  }
+
+  .kelas-pagination button {
+    width: 23px;
+    height: 23px;
+  }
+}

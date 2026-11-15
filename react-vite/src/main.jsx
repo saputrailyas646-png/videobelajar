@@ -8,6 +8,20 @@ import RegisterPage from "./pages/register";
 import HomePage from "./assets/Homepage/home";
 import CategoriPage from "./assets/Homepage/kategori";
 import InformationProduct from "./assets/Homepage/infoproduct";
+import MetodePage from "./assets/Homepage/metode";
+import MetodePage1 from "./assets/Homepage/metode1-1";
+import {
+  PembayaranBerhasil,
+  PembayaranTertunda,
+  PembayaranGagal,
+} from "./assets/Homepage/statuspembayaran";
+import PesananPage from "./assets/Homepage/pesanan";
+import KelasPage from "./assets/Homepage/kelas";
+import ProfilPage from "./assets/Homepage/profil";
+import AutoLogout from "./assets/component/AutoLogout";
+import BelajarPage from "./assets/Homepage/belajar";
+
+
 
 const app = document.getElementById("root");
 
@@ -15,12 +29,22 @@ const root = createRoot(app);
 
 root.render(
   <BrowserRouter>
+    <AutoLogout /> {/* <-- tambah */}
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/category" element={<CategoriPage />} />
-      <Route path="/information" element={<InformationProduct />} />
+      <Route path="/information/:id" element={<InformationProduct />} />
+      <Route path="/metode/:id" element={<MetodePage />} />
+      <Route path="/metode1/:id" element={<MetodePage1 />} />
+      <Route path="/pembayaran-berhasil" element={<PembayaranBerhasil />} />
+      <Route path="/pembayaran-tertunda" element={<PembayaranTertunda />} />
+      <Route path="/pembayaran-gagal" element={<PembayaranGagal />} />
+      <Route path="/pesanan" element={<PesananPage />} />
+      <Route path="/kelas" element={<KelasPage />} />
+      <Route path="/profil" element={<ProfilPage />} />
+      <Route path="/belajar/:id" element={<BelajarPage />} />
     </Routes>
   </BrowserRouter>,
 );

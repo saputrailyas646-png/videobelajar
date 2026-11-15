@@ -1,0 +1,198 @@
+
+/* PAGE */
+
+.status-payment-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #fffdf5;
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* PROGRESS */
+
+.status-progress {
+  width: 100%;
+  height: 48px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-step {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #999999;
+  font-size: 10px;
+}
+
+.status-step p {
+  margin: 0;
+}
+
+.status-step span {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
+.status-step.completed span,
+.status-step.active span {
+  background: #35cc4b;
+  border-color: #35cc4b;
+  color: #ffffff;
+}
+
+.status-step.completed,
+.status-step.active {
+  color: #333333;
+}
+
+.status-line {
+  width: 45px;
+  height: 1px;
+  background: #cccccc;
+}
+
+.status-line.completed {
+  background: #35cc4b;
+}
+
+/* STATUS CARD */
+
+.status-card {
+  width: 420px;
+  max-width: calc(100% - 32px);
+  min-height: 390px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  margin: 50px auto;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ILLUSTRATION */
+
+.payment-illustration {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+
+.status-card h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 5px 0 8px;
+}
+
+.status-description {
+  max-width: 290px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #999999;
+  margin: 0 0 16px;
+}
+
+/* BUTTON */
+
+.status-detail-button {
+  width: 160px;
+  height: 36px;
+  background: #35cc4b;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.status-detail-button:hover {
+  background: #27b83d;
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+  .status-card {
+    width: 380px;
+    min-height: 360px;
+    margin: 30px auto;
+  }
+
+  .payment-illustration {
+    width: 190px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .status-progress {
+    height: 42px;
+    gap: 6px;
+  }
+
+  .status-step {
+    font-size: 8px;
+    gap: 3px;
+  }
+
+  .status-step span {
+    width: 13px;
+    height: 13px;
+    font-size: 8px;
+  }
+
+  .status-line {
+    width: 20px;
+  }
+
+  .status-card {
+    width: calc(100% - 32px);
+    max-width: 340px;
+    min-height: 300px;
+    margin: 20px auto;
+    padding: 16px;
+  }
+
+  .payment-illustration {
+    width: 160px;
+    margin-bottom: 8px;
+  }
+
+  .status-card h2 {
+    font-size: 13px;
+  }
+
+  .status-description {
+    font-size: 9px;
+    max-width: 230px;
+  }
+
+  .status-detail-button {
+    width: 140px;
+    height: 32px;
+    font-size: 10px;
+  }
+}

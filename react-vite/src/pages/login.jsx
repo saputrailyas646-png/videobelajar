@@ -1,47 +1,75 @@
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../assets/styles/login.css";
 import logo from "../assets/logo.png";
 import logoGoogle from "../assets/logos_google-icon.png";
+import { loginUser, getCurrentUser } from "../assets/utils/auth";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("")
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [errorUsername, setErrorUsername] = useState(true);
-  const [errorPassword, setErrorPassword] = useState (true)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [errorUsername, setErrorUsername] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+
+  // kalau sudah login, jangan tampilkan halaman login
+  useEffect(() => {
+    if (getCurrentUser()) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
+
+  const validateUsername = (value) => {
+    if (value.trim().length === 0) return "Email wajib diisi.";
+    if (!emailRegex.test(value)) return "Format email tidak valid.";
+    return "";
+  };
+
+  const validatePassword = (value) => {
+    if (value.trim().length === 0) return "Password wajib diisi.";
+    if (value.length < 8) return "Password minimal 8 karakter.";
+    return "";
+  };
 
   const handleUsername = (event) => {
     const value = event.target.value;
-
     setUsername(value);
-
-    if (value.trim().length > 0) {
-      setErrorUsername(false);
-    }
+    if (errorUsername) setErrorUsername(validateUsername(value));
   };
 
   const handlePassword = (event) => {
     const value = event.target.value;
-
     setPassword(value);
-
-    if (value.trim().length > 0) {
-      setErrorPassword(false);
-    }
+    if (errorPassword) setErrorPassword(validatePassword(value));
   };
 
-
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
-    if (username.trim().length === 0) {
-      setErrorUsername(true);
+    const eUser = validateUsername(username);
+    const ePass = validatePassword(password);
+
+    setErrorUsername(eUser);
+    setErrorPassword(ePass);
+
+    if (eUser || ePass) return;
+
+    const result = await loginUser(username, password);
+    console.log("login result:", result);
+
+    if (!result.ok) {
+      setErrorPassword(result.error);
       return;
     }
 
-    setErrorUsername(false);
-    alert("Email sudah diisi. Fitur login belum terhubung.");
+    // login benar -> langsung ke beranda (atau halaman asal kalau ada)
+    navigate(location.state?.from || "/", { replace: true });
   };
 
   return (
@@ -55,7 +83,7 @@ function LoginPage() {
           <h2>Masuk ke Akun</h2>
           <p className="deskripsi">Yuk, lanjut belajar di videobelajar</p>
 
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin} noValidate>
             <label htmlFor="email">
               E-Mail <span>*</span>
             </label>
@@ -65,19 +93,16 @@ function LoginPage() {
               id="email"
               value={username}
               onChange={handleUsername}
-              onBlur={() => setErrorUsername(username.trim().length === 0)}
+              onBlur={() => setErrorUsername(validateUsername(username))}
               placeholder="contoh.username@gmail.com"
-              required
             />
 
             <span
               id="error-label-username"
               className="error-label"
-              style={{
-                visibility: errorUsername ? "visible" : "hidden",
-              }}
+              style={{ visibility: errorUsername ? "visible" : "hidden" }}
             >
-              Email wajib diisi.
+              {errorUsername || "-"}
             </span>
 
             <label htmlFor="password">
@@ -86,25 +111,28 @@ function LoginPage() {
 
             <div className="password-box">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={handlePassword}
-                onBlur={() => setErrorPassword(password.trim().length === 0)}
+                onBlur={() => setErrorPassword(validatePassword(password))}
                 placeholder="Masukkan kata sandi"
-                required
               />
-              <span>◉</span>
+              <span
+                onClick={() => setShowPassword((s) => !s)}
+                style={{ cursor: "pointer" }}
+                title={showPassword ? "Sembunyikan" : "Lihat"}
+              >
+                ◉
+              </span>
             </div>
 
             <span
               id="error-label-password"
               className="error-label"
-              style={{
-                visibility: errorPassword ? "visible" : "hidden",
-              }}
+              style={{ visibility: errorPassword ? "visible" : "hidden" }}
             >
-              password wajib diisi.
+              {errorPassword || "-"}
             </span>
 
             <a href="#" className="lupa">
@@ -119,9 +147,7 @@ function LoginPage() {
           <button
             type="button"
             className="btn-daftar"
-            onClick={() => {
-              window.location.href = "/register";
-            }}
+            onClick={() => navigate("/register")}
           >
             Daftar
           </button>

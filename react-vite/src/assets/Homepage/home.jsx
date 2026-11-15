@@ -1,13 +1,11 @@
-
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import VideoCard from "../component/card";
 import Navbar from "../component/navbar";
 import Footer from "../component/footer";
 
-import "../styles/home.css";
 import "../styles/global.css";
+import "../styles/home.css";
 
 import hero from "../hero.jpg";
 import hero2 from "../hero.png";
@@ -16,12 +14,8 @@ import iconpp from "../iconpp.png";
 import ppicon from "../ppicon.png";
 
 function HomePage() {
-  const navigate = useNavigate();
 
-  // STATE NAVBAR
-
- 
-  // STATE PAGINATION
+  // STATE PAGINATION / SLIDE
   const [currentPage, setCurrentPage] = useState(1);
 
   // DATA VIDEO COURSE
@@ -29,11 +23,13 @@ function HomePage() {
     {
       id: 1,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero,
       avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      company: "Gojek",
       rating: "3.5 (86)",
       price: "Rp 300K",
       category: "Bisnis Manajemen",
@@ -42,11 +38,13 @@ function HomePage() {
     {
       id: 2,
       title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: newsletter,
       avatar: ppicon,
       author: "John Doe",
       role: "Digital Marketer",
+      company: "Gojek",
       rating: "4.5 (120)",
       price: "Rp 250K",
       category: "Pemasaran",
@@ -55,11 +53,13 @@ function HomePage() {
     {
       id: 3,
       title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero2,
       avatar: iconpp,
       author: "Sarah Putri",
       role: "UI UX Designer",
+      company: "Gojek",
       rating: "4.8 (95)",
       price: "Rp 200K",
       category: "Digital & Teknologi",
@@ -68,11 +68,13 @@ function HomePage() {
     {
       id: 4,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero,
       avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      company: "Gojek",
       rating: "3.5 (86)",
       price: "Rp 300K",
       category: "Bisnis Manajemen",
@@ -81,11 +83,13 @@ function HomePage() {
     {
       id: 5,
       title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: newsletter,
       avatar: ppicon,
       author: "John Doe",
       role: "Digital Marketer",
+      company: "Gojek",
       rating: "4.5 (120)",
       price: "Rp 250K",
       category: "Pemasaran",
@@ -94,11 +98,13 @@ function HomePage() {
     {
       id: 6,
       title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero2,
       avatar: iconpp,
       author: "Sarah Putri",
       role: "UI UX Designer",
+      company: "Gojek",
       rating: "4.8 (95)",
       price: "Rp 200K",
       category: "Digital & Teknologi",
@@ -107,11 +113,13 @@ function HomePage() {
     {
       id: 7,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero,
       avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      company: "Gojek",
       rating: "3.5 (86)",
       price: "Rp 300K",
       category: "Bisnis Manajemen",
@@ -120,11 +128,13 @@ function HomePage() {
     {
       id: 8,
       title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: newsletter,
       avatar: ppicon,
       author: "John Doe",
       role: "Digital Marketer",
+      company: "Gojek",
       rating: "4.5 (120)",
       price: "Rp 250K",
       category: "Pemasaran",
@@ -133,11 +143,13 @@ function HomePage() {
     {
       id: 9,
       title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero2,
       avatar: iconpp,
       author: "Sarah Putri",
       role: "UI UX Designer",
+      company: "Gojek",
       rating: "4.8 (95)",
       price: "Rp 200K",
       category: "Digital & Teknologi",
@@ -146,11 +158,13 @@ function HomePage() {
     {
       id: 10,
       title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero,
       avatar: iconpp,
       author: "Jenna Ortega",
       role: "Senior Accountant",
+      company: "Gojek",
       rating: "3.5 (86)",
       price: "Rp 300K",
       category: "Bisnis Manajemen",
@@ -159,11 +173,13 @@ function HomePage() {
     {
       id: 11,
       title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: newsletter,
       avatar: ppicon,
       author: "John Doe",
       role: "Digital Marketer",
+      company: "Gojek",
       rating: "4.5 (120)",
       price: "Rp 250K",
       category: "Pemasaran",
@@ -172,11 +188,13 @@ function HomePage() {
     {
       id: 12,
       title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
+      description:
+        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
       image: hero2,
       avatar: iconpp,
       author: "Sarah Putri",
       role: "UI UX Designer",
+      company: "Gojek",
       rating: "4.8 (95)",
       price: "Rp 200K",
       category: "Digital & Teknologi",
@@ -184,15 +202,21 @@ function HomePage() {
     },
   ];
 
-  // LOGIC PAGINATION
-  const cardsPerPage = 10;
-  const totalPages = Math.ceil(videoData.length / cardsPerPage);
+  // SEMENTARA UNTUK TES SLIDE: data diperbanyak jadi 36 card.
+  // Hapus bagian ini dan pakai videoData langsung kalau data aslimu sudah lebih dari 12.
+  const allVideos = [
+    ...videoData,
+    ...videoData.map((v) => ({ ...v, id: v.id + 12 })),
+    ...videoData.map((v) => ({ ...v, id: v.id + 24 })),
+  ];
 
-  const startIndex = (currentPage - 1) * cardsPerPage;
+  // LOGIC SLIDE: 1 page = 4 baris x 3 card = 12 card
+  const cardsPerPage = 12;
+  const totalPages = Math.ceil(allVideos.length / cardsPerPage);
 
-  const currentVideos = videoData.slice(
-    startIndex,
-    startIndex + cardsPerPage
+  // pecah data jadi beberapa page
+  const pages = Array.from({ length: totalPages }, (_, index) =>
+    allVideos.slice(index * cardsPerPage, (index + 1) * cardsPerPage),
   );
 
   return (
@@ -213,8 +237,13 @@ function HomePage() {
               Temukan ilmu baru yang menarik dan menyenangkan untuk dipelajari
               kapan saja dan di mana saja.
             </p>
-
-            <button onClick={() => navigate("/home#video-section")}>
+            <button
+              onClick={() =>
+                document
+                  .getElementById("video-section")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
               Temukan Video Course untuk Dipelajari!
             </button>
           </div>
@@ -230,7 +259,7 @@ function HomePage() {
 
           {/* CATEGORY MENU */}
           <div className="category">
-            <a href="#video-section" className="ative">
+            <a href="#video-section" className="active">
               Semua Kelas
             </a>
 
@@ -241,19 +270,30 @@ function HomePage() {
             <a href="#video-section">Bisnis</a>
           </div>
 
-          {/* VIDEO CARD */}
-          <div className="category-course-grid">
-            {currentVideos.length > 0 ? (
-              currentVideos.map((item) => (
-                <VideoCard key={item.id} course={item} />
-              ))
-            ) : (
-              <p>Course tidak ditemukan.</p>
-            )}
+          {/* SLIDER: tiap slide = 1 page berisi 12 card */}
+          <div className="slider">
+            <div
+              className="slider-track"
+              style={{
+                transform: `translateX(-${(currentPage - 1) * 100}%)`,
+              }}
+            >
+              {pages.map((pageVideos, pageIndex) => (
+                <div
+                  className="slider-page category-course-grid"
+                  key={pageIndex}
+                  aria-hidden={currentPage !== pageIndex + 1}
+                >
+                  {pageVideos.map((item) => (
+                    <VideoCard key={item.id} course={item} />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* PAGINATION */}
+        {/* PAGINATION (kontrol slide) */}
         <div className="category-pagination">
           {/* BUTTON PREVIOUS */}
           <button
@@ -295,8 +335,14 @@ function HomePage() {
               menarik.
             </p>
 
-            <form>
-              <input type="email" placeholder="Masukkan Email" />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Terima kasih sudah berlangganan!");
+                e.target.reset();
+              }}
+            >
+              <input type="email" placeholder="Masukkan Email" required />
 
               <button type="submit">Subscribe</button>
             </form>
@@ -304,7 +350,6 @@ function HomePage() {
         </section>
       </main>
 
-      
       <Footer />
     </>
   );

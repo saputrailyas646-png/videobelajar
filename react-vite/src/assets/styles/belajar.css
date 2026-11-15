@@ -1,0 +1,354 @@
+.bl-page {
+  min-height: 100vh;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  padding-bottom: 56px; /* ruang untuk bar hijau di desktop */
+}
+
+/* ---------- HEADER ---------- */
+.bl-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 24px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+}
+.bl-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+}
+.bl-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bl-progress-bar {
+  width: 140px;
+  height: 8px;
+  background: #e5e5e5;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.bl-progress-fill {
+  height: 100%;
+  background: #fcb71e;
+  transition: width 0.3s;
+}
+.bl-progress-btn {
+  background: none;
+  border: none;
+  color: #3ecf4c;
+  font-weight: 600;
+  cursor: pointer;
+}
+.bl-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.bl-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fcb71e;
+  color: #fff;
+  font-weight: 700;
+}
+
+.bl-progress-panel {
+  position: absolute;
+  top: 100%;
+  right: 80px;
+  z-index: 20;
+  width: 320px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.bl-panel-title {
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+.bl-panel-text {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #666;
+}
+.bl-cert-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #3ecf4c;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.bl-cert-btn:disabled {
+  background: #cfcfcf;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+/* ---------- BODY ---------- */
+.bl-body {
+  display: flex;
+  align-items: flex-start;
+}
+.bl-main {
+  flex: 1;
+  min-width: 0;
+}
+.bl-video {
+  background: #000;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  width: 100%;
+}
+.bl-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.bl-video-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #fff;
+  font-size: 16px;
+}
+
+.bl-info {
+  padding: 24px;
+}
+.bl-info h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+.bl-desc {
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 14px;
+}
+.bl-mentor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.bl-mentor img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.bl-mentor strong {
+  display: block;
+  font-size: 14px;
+}
+.bl-mentor span {
+  font-size: 12px;
+  color: #777;
+}
+.bl-rating {
+  font-size: 13px;
+  color: #666;
+}
+.bl-stars {
+  color: #fcb71e;
+  letter-spacing: 2px;
+}
+
+/* ---------- BAR HIJAU ---------- */
+.bl-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  height: 56px;
+  background: #3ecf4c;
+}
+.bl-bar button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 24px;
+  cursor: pointer;
+}
+.bl-bar button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.bl-only-mobile {
+  display: none;
+}
+
+/* ---------- SIDEBAR ---------- */
+.bl-side {
+  width: 340px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-left: 1px solid #e5e5e5;
+  background: #fff;
+}
+.bl-side-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+.bl-module {
+  margin-bottom: 8px;
+}
+.bl-module-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 4px;
+  background: none;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+.bl-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+.bl-step.active {
+  background: #e9f9ea;
+  border-color: #3ecf4c;
+}
+.bl-step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  font-size: 11px;
+  color: #666;
+  flex-shrink: 0;
+}
+.bl-step-icon.done {
+  background: #3ecf4c;
+  border-color: #3ecf4c;
+  color: #fff;
+}
+.bl-step-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+.bl-step-text small {
+  color: #888;
+  font-size: 12px;
+}
+.bl-review {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #fcb71e;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.bl-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #fff;
+  color: #3ecf4c;
+  border: 1px solid #3ecf4c;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.bl-download:hover {
+  background: #e9f9ea;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+  .bl-page {
+    padding-bottom: 0;
+  }
+  .bl-header {
+    padding: 10px 16px;
+  }
+  .bl-back-text {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bl-progress-bar,
+  .bl-avatar {
+    display: none;
+  }
+  .bl-progress-panel {
+    left: 0;
+    right: 0;
+    width: auto;
+    border-radius: 0;
+  }
+  .bl-body {
+    flex-direction: column;
+  }
+  .bl-info {
+    padding: 16px;
+  }
+  .bl-info h2 {
+    font-size: 18px;
+  }
+  /* bar hijau ikut alur halaman, di bawah rating */
+  .bl-bar {
+    position: static;
+    height: 48px;
+  }
+  .bl-bar button {
+    padding: 0 16px;
+  }
+  .bl-only-desktop {
+    display: none;
+  }
+  .bl-only-mobile {
+    display: inline;
+  }
+  .bl-side {
+    width: 100%;
+    border-left: none;
+  }
+}
