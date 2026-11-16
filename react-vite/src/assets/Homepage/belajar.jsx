@@ -1,7 +1,7 @@
 // Sesuaikan path import dengan struktur foldermu.
 import { useMemo, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { getCourseById } from "./courseData";
+import { getCourseById } from "../utils/courseStore";
 import { getCurrentUser } from "../utils/auth";
 import {
   buildSteps,
@@ -119,18 +119,30 @@ export default function BelajarPage() {
         </button>
 
         <div className="bl-header-right">
-          <div className="bl-progress-bar">
-            <div
-              className="bl-progress-fill"
-              style={{ width: `${percent}%` }}
-            />
-          </div>
-          <button
-            className="bl-progress-btn"
-            onClick={() => setShowProgress((v) => !v)}
-          >
-            {done}/{total} ▾
-          </button>
+          {finished ? (
+            <button
+              className="bl-cert-top"
+              onClick={() => setShowProgress((v) => !v)}
+            >
+              Ambil Sertifikat ▾
+            </button>
+          ) : (
+            <>
+              <div className="bl-progress-bar">
+                <div
+                  className="bl-progress-fill"
+                  style={{ width: `${percent}%` }}
+                />
+              </div>
+              <button
+                className="bl-progress-btn"
+                onClick={() => setShowProgress((v) => !v)}
+              >
+                {done}/{total} ▾
+              </button>
+            </>
+          )}
+
           {photo ? (
             <img className="bl-avatar" src={photo} alt="Profil" />
           ) : (
@@ -142,11 +154,21 @@ export default function BelajarPage() {
 
         {showProgress && (
           <div className="bl-progress-panel">
-            <p className="bl-panel-title">{percent}% Modul Telah Selesai</p>
-            <p className="bl-panel-text">
-              Selesaikan Semua Modul Untuk Mendapatkan Sertifikat
+            <p className="bl-panel-title">
+              {finished
+                ? "Modul sudah selesai"
+                : `${percent}% Modul Telah Selesai`}
             </p>
-            <button className="bl-cert-btn" disabled={!finished}>
+            <p className="bl-panel-text">
+              {finished
+                ? "Ini berarti modul kamu sudah selesai, silakan download sertifikat."
+                : "Selesaikan Semua Modul Untuk Mendapatkan Sertifikat"}
+            </p>
+            <button
+              className="bl-cert-btn"
+              disabled={!finished}
+              onClick={() => navigate(`/sertifikat/${id}`)}
+            >
               Ambil Sertifikat
             </button>
           </div>

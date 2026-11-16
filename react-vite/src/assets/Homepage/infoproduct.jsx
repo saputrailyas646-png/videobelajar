@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCurrentUser } from "../utils/auth";
-import { getCourseById } from "./courseData";
-
+import { getCourseById } from "../utils/courseStore";
 import Navbar from "../component/navbar";
 import Footer from "../component/footer";
 

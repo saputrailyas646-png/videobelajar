@@ -187,22 +187,6 @@ function ProfilPage() {
                     title="E-Mail dari saat mendaftar tidak dapat diubah"
                   />
                 </div>
-
-                <div className="profil-field">
-                  <label htmlFor="countryCode">Kode</label>
-                  <select
-                    id="countryCode"
-                    name="countryCode"
-                    value={user.countryCode}
-                    onChange={handleChange}
-                  >
-                    <option value="+62">+62</option>
-                    <option value="+60">+60</option>
-                    <option value="+65">+65</option>
-                    <option value="+1">+1</option>
-                  </select>
-                </div>
-
                 <div className="profil-field">
                   <label htmlFor="phone">No. Hp</label>
                   <input

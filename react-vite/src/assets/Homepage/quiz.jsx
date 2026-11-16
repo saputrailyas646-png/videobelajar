@@ -58,6 +58,7 @@ export default function Quiz({ cardId, step, onChange, onContinue }) {
       empty,
       passed: score >= PASS_SCORE,
       attempts: res.attempts,
+      date: new Date().toISOString(),
     });
     setConfirm(false);
     setStage("result");
@@ -173,7 +174,16 @@ export default function Quiz({ cardId, step, onChange, onContinue }) {
 
         <div className="qz-body">
           <h2>Hasil Quiz</h2>
-
+          <p className="qz-last">
+            Tanggal Quiz:{" "}
+            {new Date(summary.date).toLocaleString("id-ID", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
           <div className="qz-result">
             <div className={`qz-score-box ${pass ? "pass" : "fail"}`}>
               <span>Nilai Kamu</span>
@@ -195,8 +205,7 @@ export default function Quiz({ cardId, step, onChange, onContinue }) {
               </div>
             </div>
           </div>
-
-          <h3 className="qz-sub">Umpan Balik</h3>
+          <h3 className="qz-sub">{pass ? "Selesai!" : "Umpan Balik"}</h3>{" "}
           <p className="qz-text">
             {pass
               ? "Kerja bagus! Kamu sudah memahami materi pada modul ini dan siap lanjut ke tahap berikutnya."
@@ -205,7 +214,6 @@ export default function Quiz({ cardId, step, onChange, onContinue }) {
           <p className="qz-last">
             Percobaan ke-{summary.attempts} · Nilai minimal lulus {PASS_SCORE}
           </p>
-
           <div className="qz-actions">
             {pass ? (
               <>

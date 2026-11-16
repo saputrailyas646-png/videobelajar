@@ -299,6 +299,15 @@
 .bl-download:hover {
   background: #e9f9ea;
 }
+.bl-cert-top {
+  padding: 8px 16px;
+  background: #3ecf4c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 768px) {

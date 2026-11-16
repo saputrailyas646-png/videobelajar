@@ -474,21 +474,28 @@
 }
 
 /* saat dicetak: hanya sertifikat yang tampil */
+/* ---------- CETAK / SIMPAN PDF: hanya sertifikat ---------- */
 @media print {
   body * {
     visibility: hidden;
   }
-
-  .sertifikat-print,
-  .sertifikat-print * {
+  #sertifikat,
+  #sertifikat * {
     visibility: visible;
   }
-
-  .sertifikat-print {
+  #sertifikat {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
+    max-width: none;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: landscape;
+    margin: 12mm;
   }
 }
 

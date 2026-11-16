@@ -20,12 +20,17 @@ import KelasPage from "./assets/Homepage/kelas";
 import ProfilPage from "./assets/Homepage/profil";
 import AutoLogout from "./assets/component/AutoLogout";
 import BelajarPage from "./assets/Homepage/belajar";
+import SertifikatPage from "./assets/Homepage/sertifikat";
+import KelolaKursusPage from "./assets/Homepage/kelolakursus";
+
+
 
 
 
 const app = document.getElementById("root");
 
 const root = createRoot(app);
+import { seedAdmin } from "./assets/utils/auth";
 
 root.render(
   <BrowserRouter>
@@ -45,6 +50,8 @@ root.render(
       <Route path="/kelas" element={<KelasPage />} />
       <Route path="/profil" element={<ProfilPage />} />
       <Route path="/belajar/:id" element={<BelajarPage />} />
+      <Route path="/sertifikat/:id" element={<SertifikatPage />} />
+      <Route path="/kelola-kursus" element={<KelolaKursusPage />} />
     </Routes>
   </BrowserRouter>,
 );

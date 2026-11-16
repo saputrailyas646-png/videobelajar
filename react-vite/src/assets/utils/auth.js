@@ -140,3 +140,26 @@ export function updateProfile({ name, phone, countryCode, photo }) {
 
   return { ok: true };
 }
+
+// Akun admin tetap untuk latihan (tanpa backend)
+export const ADMIN_EMAIL = "admin@videobelajar.com";
+const ADMIN_PASSWORD = "admin123";
+
+// Buat akun admin otomatis kalau belum ada
+export async function seedAdmin() {
+  const users = getUsers();
+  if (users.some((u) => u.email === ADMIN_EMAIL)) return;
+
+  users.push({
+    name: "Admin",
+    email: ADMIN_EMAIL,
+    phone: "",
+    passwordHash: await hashPassword(ADMIN_PASSWORD),
+  });
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+export function isAdmin() {
+  const user = getCurrentUser();
+  return !!user && user.email === ADMIN_EMAIL;
+}

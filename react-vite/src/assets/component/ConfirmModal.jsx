@@ -1,5 +1,3 @@
-import "../styles/modal.css";
-
 export default function ConfirmModal({
   open,
   title,
@@ -10,17 +8,68 @@ export default function ConfirmModal({
   if (!open) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "16px",
+        background: "rgba(0, 0, 0, 0.5)",
+      }}
+    >
       <div
-        className="modal"
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
+        style={{
+          width: "min(380px, 100%)",
+          padding: "24px",
+          background: "#fff",
+          borderRadius: "10px",
+          textAlign: "center",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+        }}
       >
-        <div className="modal-icon">✓</div>
-        <h3>{title}</h3>
-        <p>{message}</p>
-        <button type="button" className="modal-btn" onClick={onClose}>
+        <div
+          style={{
+            width: "48px",
+            height: "48px",
+            margin: "0 auto 12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%",
+            background: "#3ecf4c",
+            color: "#fff",
+            fontSize: "24px",
+          }}
+        >
+          ✓
+        </div>
+        <h3 style={{ margin: "0 0 8px", fontSize: "18px", color: "#222" }}>
+          {title}
+        </h3>
+        <p style={{ margin: "0 0 16px", fontSize: "14px", color: "#666" }}>
+          {message}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          style={{
+            width: "100%",
+            padding: "10px",
+            background: "#3ecf4c",
+            color: "#fff",
+            border: "none",
+            borderRadius: "6px",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
           {buttonText}
         </button>
       </div>

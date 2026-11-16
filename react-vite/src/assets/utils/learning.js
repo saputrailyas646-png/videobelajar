@@ -1,4 +1,4 @@
-import { getCourseById } from "../Homepage/courseData";
+import { getCourseById } from "./courseStore";
 import { getCurrentUser } from "./auth";
 
 const KEY = "videobelajar_progress";

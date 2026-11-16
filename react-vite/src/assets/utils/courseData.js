@@ -4,6 +4,8 @@ import newsletter from "../newsletter.jpg";
 import iconpp from "../iconpp.png";
 import ppicon from "../ppicon.png";
 
+export const IMAGES = { hero, hero2, newsletter, iconpp, ppicon };
+
 // DATA COURSE
 export const courseData = [
   {
@@ -14,6 +16,8 @@ export const courseData = [
       "Belajar analisis keuangan bersama instruktur profesional. Pelajari keterampilan yang dibutuhkan untuk menjadi financial analyst.",
     image: hero,
     avatar: iconpp,
+    imageKey: "hero",
+    avatarKey: "iconpp",
     author: "Jenna Ortega",
     role: "Senior Accountant",
     rating: "3.5 (86)",
@@ -49,6 +53,8 @@ export const courseData = [
       "Pelajari strategi pemasaran digital, pengelolaan media sosial, dan cara meningkatkan jangkauan bisnis secara online.",
     image: newsletter,
     avatar: ppicon,
+    imageKey: "newsletter",
+    avatarKey: "ppicon",
     author: "John Doe",
     role: "Digital Marketer",
     rating: "4.5 (120)",
@@ -84,6 +90,8 @@ export const courseData = [
       "Pelajari cara membuat desain aplikasi yang menarik, mudah digunakan, serta memahami dasar UI UX Design.",
     image: hero2,
     avatar: iconpp,
+    imageKey: "hero2",
+    avatarKey: "iconpp",
     author: "Sarah Putri",
     role: "UI UX Designer",
     rating: "4.8 (95)",
@@ -112,10 +120,3 @@ export const courseData = [
     ],
   },
 ];
-
-// ID COURSE
-// Course pada kategori saat ini berulang setiap 3 card
-export function getCourseById(id) {
-  const courseId = ((Number(id) - 1) % 3) + 1;
-  return courseData.find((item) => item.id === courseId) || courseData[0];
-}

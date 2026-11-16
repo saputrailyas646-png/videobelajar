@@ -3,8 +3,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "../styles/metode.css";
 
 import Navbar from "../component/navbar";
-import { getCourseById } from "./courseData";
-
+import { getCourseById } from "../utils/courseStore";
 import bni from "/src/iconpayments/bni.jpg";
 import bri from "/src/iconpayments/bri.jpg";
 import bca from "/src/iconpayments/bca.jpg";

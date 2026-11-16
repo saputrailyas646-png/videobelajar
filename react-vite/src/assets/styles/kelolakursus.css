@@ -1,0 +1,183 @@
+.kk-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+.kk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.kk-header h1 {
+  margin: 4px 0;
+}
+.kk-header p {
+  margin: 0;
+  color: #6b7280;
+}
+.kk-back {
+  color: #3ecf4c;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.kk-btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.kk-btn-primary {
+  background: #3ecf4c;
+  color: #fff;
+}
+.kk-btn-ghost {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+.kk-btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+.kk-btn-small {
+  padding: 6px 12px;
+  font-size: 13px;
+  background: #f3f4f6;
+  color: #111827;
+}
+.kk-btn-small.kk-btn-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.kk-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.kk-notice {
+  background: #dcfce7;
+  color: #166534;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.kk-error {
+  color: #b91c1c;
+  margin: 0;
+  font-size: 14px;
+}
+
+.kk-form {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.kk-form h2 {
+  margin: 0;
+}
+.kk-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+}
+.kk-form input,
+.kk-form textarea,
+.kk-form select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 400;
+}
+.kk-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.kk-form .kk-actions {
+  justify-content: flex-end;
+}
+
+.kk-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font: inherit;
+}
+
+.kk-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+.kk-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+.kk-table th,
+.kk-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+}
+.kk-table th {
+  background: #f9fafb;
+}
+.kk-course-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kk-course-cell img {
+  width: 56px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.kk-empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 32px 0;
+}
+
+.kk-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+.kk-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+}
+.kk-modal h3 {
+  margin-top: 0;
+}
+.kk-modal .kk-actions {
+  justify-content: flex-end;
+  margin-top: 16px;
+}

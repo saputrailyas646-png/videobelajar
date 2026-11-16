@@ -1,0 +1,231 @@
+.sp-page {
+  background: #fffaf0;
+  min-height: 70vh;
+}
+.sp-wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+.sp-crumb {
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #777;
+}
+.sp-crumb button {
+  padding: 0;
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+}
+.sp-crumb strong {
+  color: #333;
+}
+
+.sp-card {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+/* ---------- SERTIFIKAT ---------- */
+.sp-cert {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 760px;
+  margin: 0 auto 24px;
+  padding: 32px 24px;
+  aspect-ratio: 1.414 / 1;
+  overflow: hidden;
+  text-align: center;
+  background: #fbfaf4;
+  border: 2px solid #e8e2c8;
+  border-radius: 8px;
+}
+.sp-cert::before,
+.sp-cert::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.sp-cert::before {
+  top: -60px;
+  left: -60px;
+  width: 180px;
+  height: 180px;
+  background: #3ecf4c;
+  opacity: 0.85;
+}
+.sp-cert::after {
+  right: -50px;
+  bottom: -50px;
+  width: 150px;
+  height: 150px;
+  background: #fcb71e;
+  opacity: 0.85;
+}
+.sp-cert > * {
+  position: relative;
+  z-index: 1;
+}
+.sp-brand {
+  margin-bottom: 6px;
+  font-weight: 800;
+  font-size: clamp(12px, 2vw, 16px);
+  color: #fcb71e;
+}
+.sp-title {
+  margin: 0;
+  font-size: clamp(22px, 5vw, 44px);
+  font-weight: 800;
+  color: #2a2a2a;
+}
+.sp-sub {
+  margin: 0 0 12px;
+  font-size: clamp(12px, 2.4vw, 18px);
+  color: #555;
+}
+.sp-small {
+  margin: 0;
+  font-size: clamp(10px, 1.8vw, 13px);
+  color: #777;
+}
+.sp-name {
+  margin: 6px 0 10px;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: clamp(24px, 6vw, 48px);
+  color: #2a8f36;
+}
+.sp-course {
+  margin: 6px 0 14px;
+  max-width: 80%;
+  font-weight: 700;
+  font-size: clamp(12px, 2.6vw, 20px);
+  color: #2a2a2a;
+}
+.sp-sign {
+  display: flex;
+  gap: 40px;
+  margin-top: 4px;
+}
+.sp-sign div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 6px;
+  border-top: 1px solid #999;
+  min-width: 110px;
+}
+.sp-sign strong {
+  font-size: clamp(10px, 1.8vw, 13px);
+}
+.sp-sign span {
+  font-size: clamp(9px, 1.5vw, 11px);
+  color: #888;
+}
+
+/* ---------- INFO KELAS ---------- */
+.sp-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.sp-info h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+.sp-desc {
+  margin: 0 0 12px;
+  max-width: 560px;
+  font-size: 14px;
+  color: #666;
+}
+.sp-mentor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.sp-mentor img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.sp-mentor strong {
+  display: block;
+  font-size: 14px;
+}
+.sp-mentor span {
+  font-size: 12px;
+  color: #777;
+}
+.sp-rating {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+.sp-rating span {
+  color: #fcb71e;
+  letter-spacing: 2px;
+}
+.sp-download {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  background: #fff;
+  color: #3ecf4c;
+  border: 1px solid #3ecf4c;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sp-download:hover {
+  background: #e9f9ea;
+}
+
+@media (max-width: 768px) {
+  .sp-card {
+    padding: 16px;
+  }
+  .sp-info {
+    flex-direction: column;
+  }
+  .sp-download {
+    width: 100%;
+  }
+  .sp-sign {
+    gap: 16px;
+  }
+  .sp-sign div {
+    min-width: 80px;
+  }
+}
+
+/* ---------- CETAK / SIMPAN PDF: hanya sertifikat ---------- */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #sertifikat,
+  #sertifikat * {
+    visibility: visible !important;
+  }
+  #sertifikat {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  @page {
+    size: landscape;
+    margin: 12mm;
+  }
+}

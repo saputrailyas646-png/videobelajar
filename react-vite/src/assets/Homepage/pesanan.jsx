@@ -5,8 +5,7 @@ import Navbar from "../component/navbar";
 import Footer from "../component/footer";
 import { getCurrentUser } from "../utils/auth";
 import { getOrders } from "../utils/payments";
-import { getCourseById } from "./courseData";
-
+import { getCourseById } from "../utils/courseStore";
 import hero from "../hero.jpg";
 
 const ADMIN_FEE = 7000; // sama dengan di metode1-1.jsx

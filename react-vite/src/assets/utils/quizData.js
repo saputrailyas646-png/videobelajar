@@ -1,5 +1,4 @@
-import { getCourseById } from "../Homepage/courseData";
-
+import { getCourseById } from "./courseStore";
 // Q(pertanyaan, [pilihan], indeks jawaban benar mulai dari 0)
 const Q = (text, options, answer) => ({ text, options, answer });
 

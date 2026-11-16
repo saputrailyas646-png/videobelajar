@@ -25,6 +25,7 @@ function RegisterPage() {
   });
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const validateField = (name, value, values = form) => {
     switch (name) {
@@ -44,7 +45,8 @@ function RegisterPage() {
         return "";
       case "confirmPassword":
         if (!value) return "Konfirmasi kata sandi wajib diisi.";
-        if (value !== values.password) return "Konfirmasi kata sandi tidak sama.";
+        if (value !== values.password)
+          return "Konfirmasi kata sandi tidak sama.";
         return "";
       default:
         return "";
@@ -64,7 +66,7 @@ function RegisterPage() {
       updated.confirmPassword = validateField(
         "confirmPassword",
         next.confirmPassword,
-        next
+        next,
       );
     }
     setErrors(updated);
@@ -77,8 +79,15 @@ function RegisterPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (submitting) return; // cegah klik ganda
 
-    const fields = ["username", "email", "phone", "password", "confirmPassword"];
+    const fields = [
+      "username",
+      "email",
+      "phone",
+      "password",
+      "confirmPassword",
+    ];
     const newErrors = {};
     fields.forEach((name) => {
       newErrors[name] = validateField(name, form[name]);
@@ -87,6 +96,8 @@ function RegisterPage() {
 
     if (fields.some((name) => newErrors[name])) return;
 
+    setSubmitting(true);
+
     // simpan akun ke localStorage (lihat utils/auth.js)
     const result = await registerUser({
       name: form.username,
@@ -94,6 +105,8 @@ function RegisterPage() {
       phone: form.countryCode + form.phone,
       password: form.password,
     });
+
+    setSubmitting(false);
 
     if (!result.ok) {
       setErrors((prev) => ({ ...prev, email: result.error }));
@@ -130,7 +143,9 @@ function RegisterPage() {
               placeholder="Masukkan nama lengkap"
               {...field("username")}
             />
-            {errors.username && <span style={errorStyle}>{errors.username}</span>}
+            {errors.username && (
+              <span style={errorStyle}>{errors.username}</span>
+            )}
 
             <label htmlFor="email">Email</label>
             <input
@@ -168,7 +183,9 @@ function RegisterPage() {
               placeholder="Masukkan kata sandi"
               {...field("password")}
             />
-            {errors.password && <span style={errorStyle}>{errors.password}</span>}
+            {errors.password && (
+              <span style={errorStyle}>{errors.password}</span>
+            )}
 
             <label htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
             <input
@@ -181,8 +198,8 @@ function RegisterPage() {
               <span style={errorStyle}>{errors.confirmPassword}</span>
             )}
 
-            <button type="submit" className="btn-daftar">
-              Daftar
+            <button type="submit" className="btn-daftar" disabled={submitting}>
+              {submitting ? "Memproses..." : "Daftar"}
             </button>
           </form>
 
