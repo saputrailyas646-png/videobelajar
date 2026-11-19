@@ -18,6 +18,15 @@ function LoginPage() {
   const [errorUsername, setErrorUsername] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
 
+  // info akun admin untuk penguji (muncul sekali per sesi browser)
+  // info akun admin untuk penguji (muncul setiap halaman login dibuka / di-refresh)
+  useEffect(() => {
+    if (getCurrentUser()) return; // sudah login, tidak perlu alert
+    alert(
+      "Akun admin untuk penguji crud akun khusus admin:\n\nE-Mail: admin@videobelajar.com\nKata Sandi: admin123 \n akun selain ini semantarra = user",
+    );
+  }, []);
+
   // kalau sudah login, jangan tampilkan halaman login
   useEffect(() => {
     if (getCurrentUser()) {

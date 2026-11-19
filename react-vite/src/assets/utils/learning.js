@@ -1,21 +1,25 @@
 import { getCourseById } from "./courseStore";
 import { getCurrentUser } from "./auth";
+import { getQuestions } from "./quizData";
 
 const KEY = "videobelajar_progress";
 
-// GANTI dengan link video milikmu (format embed, contoh YouTube:
-// "https://www.youtube.com/embed/XXXXXXXXXXX"). Satu video per kelas (id 1-3).
-// Kalau mau video beda per materi, isi `videoUrl` di tiap lesson pada courseData.js.
+// Video cadangan per kelas kalau admin belum mengisi link video di Kelola Kursus.
+// Nilai "GANTI_ID" dianggap belum diisi.
 const VIDEO_BY_COURSE = {
   1: "https://www.youtube.com/embed/GANTI_ID_VIDEO_1",
   2: "https://www.youtube.com/embed/GANTI_ID_VIDEO_2",
   3: "https://www.youtube.com/embed/GANTI_ID_VIDEO_3",
 };
 
-// Tiap modul = semua video -> rangkuman -> quiz
+// Tiap modul = semua video -> rangkuman -> quiz (kalau modul punya soal)
 export function buildSteps(cardId) {
   const course = getCourseById(cardId);
   const steps = [];
+
+  const fallback = VIDEO_BY_COURSE[course.id];
+  const fallbackVideo =
+    fallback && !fallback.includes("GANTI_ID") ? fallback : "";
 
   course.curriculum.forEach((mod, mi) => {
     mod.lessons.forEach((lesson, li) => {
@@ -27,7 +31,7 @@ export function buildSteps(cardId) {
         title: lesson.title,
         label: `Video: ${lesson.title}`,
         duration: lesson.duration,
-        videoUrl: lesson.videoUrl || VIDEO_BY_COURSE[course.id] || "",
+        videoUrl: lesson.videoUrl || fallbackVideo,
       });
     });
     steps.push({
@@ -39,20 +43,24 @@ export function buildSteps(cardId) {
       label: `Rangkuman: ${mod.title}`,
       duration: "5 Menit",
     });
-    steps.push({
-      id: `m${mi}-q`,
-      module: mi,
-      moduleTitle: mod.title,
-      type: "quiz",
-      title: `Quiz: ${mod.title}`,
-      label: `Quiz: ${mod.title}`,
-      duration: "10 Pertanyaan",
-    });
+
+    // modul tanpa soal tidak punya langkah quiz
+    const questionCount = getQuestions(cardId, mi).length;
+    if (questionCount > 0) {
+      steps.push({
+        id: `m${mi}-q`,
+        module: mi,
+        moduleTitle: mod.title,
+        type: "quiz",
+        title: `Quiz: ${mod.title}`,
+        label: `Quiz: ${mod.title}`,
+        duration: `${questionCount} Pertanyaan`,
+      });
+    }
   });
 
   return steps;
 }
-
 function userKey() {
   const u = getCurrentUser();
   return (u && (u.email || u.id)) || "guest";

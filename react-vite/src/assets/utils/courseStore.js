@@ -17,11 +17,17 @@ export function getCourses() {
   return courseData.map(withImages);
 }
 
+// SIMPAN
 export function saveCourses(courses) {
-  try {
-    const plain = courses.map(({ image, avatar, ...rest }) => rest);
-    localStorage.setItem(KEY, JSON.stringify(plain));
-  } catch {}
+  // foto bawaan cukup disimpan key-nya; foto upload (data URL) harus ikut disimpan
+  const plain = courses.map((c) => {
+    const copy = { ...c };
+    if (copy.imageKey) delete copy.image;
+    if (copy.avatarKey) delete copy.avatar;
+    return copy;
+  });
+  // tanpa try/catch: kalau penuh, error diteruskan dan ditangkap di halaman
+  localStorage.setItem(KEY, JSON.stringify(plain));
 }
 
 export function resetCourses() {

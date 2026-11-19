@@ -71,7 +71,12 @@ function VideoCard({ course }) {
             <Stars score={score} />
             <small>{course.rating}</small>
           </div>
-          <strong>{course.price}</strong>
+          <div className="video-card-price">
+            {course.oldPrice && (
+              <span className="video-card-old-price">{course.oldPrice}</span>
+            )}
+            <strong>{course.price}</strong>
+          </div>{" "}
         </div>
       </div>
     </div>

@@ -8,11 +8,28 @@ import "../styles/global.css";
 
 import VideoCard from "../component/card";
 
-import hero from "../hero.jpg";
-import hero2 from "../hero.png";
-import newsletter from "../newsletter.jpg";
-import iconpp from "../iconpp.png";
-import ppicon from "../ppicon.png";
+import { getCourses } from "../utils/courseStore";
+
+// kategori bawaan (kategori baru dari Kelola Kursus ditambahkan otomatis)
+const DEFAULT_CATEGORIES = [
+  "Pemasaran",
+  "Digital & Teknologi",
+  "Pengembangan Diri",
+  "Bisnis Manajemen",
+];
+
+// ubah teks harga jadi angka dalam satuan ribu.
+// "Rp 300K" -> 300, "250k" -> 250, "16000" -> 16, "Rp 300.000" -> 300
+function priceInK(price) {
+  const text = String(price || "").toLowerCase();
+  const digits = text.replace(/[^\d]/g, "");
+  if (!digits) return 0;
+
+  const n = Number(digits);
+  if (/k|rb/.test(text)) return n;
+  if (/jt/.test(text)) return n * 1000;
+  return n / 1000;
+}
 
 function CategoriPage() {
   // STATE PAGINATION
@@ -44,164 +61,17 @@ function CategoriPage() {
     };
   });
 
-  // DATA VIDEO COURSE
-  const videoData = [
-    {
-      id: 1,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 2,
-      title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 3,
-      title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
+  // DATA KURSUS: dibaca dari courseStore (hasil Kelola Kursus)
+  const [courses] = useState(() =>
+    getCourses().map((c) => ({
       date: "2026-11-01",
-    },
-    {
-      id: 4,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 5,
-      title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 6,
-      title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
-      date: "2026-11-01",
-    },
-    {
-      id: 7,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 8,
-      title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 9,
-      title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
-      date: "2026-11-01",
-    },
-    {
-      id: 10,
-      title: "Big 4 Auditor Financial Analyst",
-      description: "Belajar analisis keuangan bersama instruktur profesional.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 11,
-      title: "Digital Marketing untuk Pemula",
-      description: "Pelajari strategi pemasaran digital.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 12,
-      title: "Belajar UI UX Design",
-      description: "Membuat desain aplikasi yang menarik.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
-      date: "2026-11-01",
-    },
+      ...c,
+    })),
+  );
+
+  // daftar kategori: bawaan + kategori baru dari data kursus
+  const categories = [
+    ...new Set([...DEFAULT_CATEGORIES, ...courses.map((c) => c.category)]),
   ];
 
   // TOGGLE ACCORDION
@@ -221,13 +91,13 @@ function CategoriPage() {
   };
 
   // FILTER SEARCH, KATEGORI, DAN HARGA
-  const filteredVideos = videoData.filter((item) => {
+  const filteredVideos = courses.filter((item) => {
     const cocokSearch = item.title.toLowerCase().includes(search.toLowerCase());
 
     const cocokKategori =
       selectedCategory === "Semua" || item.category === selectedCategory;
 
-    const priceNumber = Number(item.price.replace("Rp ", "").replace("K", ""));
+    const priceNumber = priceInK(item.price);
 
     let cocokHarga = true;
 
@@ -292,12 +162,7 @@ function CategoriPage() {
 
                 {openFilter.bidang && (
                   <div className="listmenu">
-                    {[
-                      "Pemasaran",
-                      "Digital & Teknologi",
-                      "Pengembangan Diri",
-                      "Bisnis Manajemen",
-                    ].map((category) => (
+                    {categories.map((category) => (
                       <label className="filter-option" key={category}>
                         <input
                           type="checkbox"
@@ -405,9 +270,11 @@ function CategoriPage() {
                 }}
               >
                 <option value="Semua">Semua Kategori</option>
-                <option value="Bisnis Manajemen">Bisnis Manajemen</option>
-                <option value="Pemasaran">Pemasaran</option>
-                <option value="Digital & Teknologi">Digital & Teknologi</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
 
               <div className="search-box">

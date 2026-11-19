@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import VideoCard from "../component/card";
 import Navbar from "../component/navbar";
@@ -7,216 +7,51 @@ import Footer from "../component/footer";
 import "../styles/global.css";
 import "../styles/home.css";
 
-import hero from "../hero.jpg";
-import hero2 from "../hero.png";
-import newsletter from "../newsletter.jpg";
-import iconpp from "../iconpp.png";
-import ppicon from "../ppicon.png";
+import { getCourses } from "../utils/courseStore";
 
 function HomePage() {
-
   // STATE PAGINATION / SLIDE
   const [currentPage, setCurrentPage] = useState(1);
 
-  // DATA VIDEO COURSE
-  const videoData = [
-    {
-      id: 1,
-      title: "Big 4 Auditor Financial Analyst",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
+  // DATA KURSUS: dibaca dari courseStore (hasil Kelola Kursus).
+  // company & date diberi nilai bawaan karena kursus baru belum punya.
+  const [courses] = useState(() =>
+    getCourses().map((c) => ({
       company: "Gojek",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 2,
-      title: "Digital Marketing untuk Pemula",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      company: "Gojek",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 3,
-      title: "Belajar UI UX Design",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      company: "Gojek",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
       date: "2026-11-01",
-    },
-    {
-      id: 4,
-      title: "Big 4 Auditor Financial Analyst",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      company: "Gojek",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 5,
-      title: "Digital Marketing untuk Pemula",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      company: "Gojek",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 6,
-      title: "Belajar UI UX Design",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      company: "Gojek",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
-      date: "2026-11-01",
-    },
-    {
-      id: 7,
-      title: "Big 4 Auditor Financial Analyst",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      company: "Gojek",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 8,
-      title: "Digital Marketing untuk Pemula",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      company: "Gojek",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 9,
-      title: "Belajar UI UX Design",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      company: "Gojek",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
-      date: "2026-11-01",
-    },
-    {
-      id: 10,
-      title: "Big 4 Auditor Financial Analyst",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero,
-      avatar: iconpp,
-      author: "Jenna Ortega",
-      role: "Senior Accountant",
-      company: "Gojek",
-      rating: "3.5 (86)",
-      price: "Rp 300K",
-      category: "Bisnis Manajemen",
-      date: "2026-11-08",
-    },
-    {
-      id: 11,
-      title: "Digital Marketing untuk Pemula",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: newsletter,
-      avatar: ppicon,
-      author: "John Doe",
-      role: "Digital Marketer",
-      company: "Gojek",
-      rating: "4.5 (120)",
-      price: "Rp 250K",
-      category: "Pemasaran",
-      date: "2026-11-05",
-    },
-    {
-      id: 12,
-      title: "Belajar UI UX Design",
-      description:
-        "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan sangat terpercaya.",
-      image: hero2,
-      avatar: iconpp,
-      author: "Sarah Putri",
-      role: "UI UX Designer",
-      company: "Gojek",
-      rating: "4.8 (95)",
-      price: "Rp 200K",
-      category: "Digital & Teknologi",
-      date: "2026-11-01",
-    },
-  ];
+      ...c,
+    })),
+  );
 
-  // SEMENTARA UNTUK TES SLIDE: data diperbanyak jadi 36 card.
-  // Hapus bagian ini dan pakai videoData langsung kalau data aslimu sudah lebih dari 12.
-  const allVideos = [
-    ...videoData,
-    ...videoData.map((v) => ({ ...v, id: v.id + 12 })),
-    ...videoData.map((v) => ({ ...v, id: v.id + 24 })),
-  ];
+  // FILTER KATEGORI: daftar tombol dibuat dari kategori yang ada di data kursus
+  const [activeCategory, setActiveCategory] = useState("Semua Kelas");
+
+  const categories = useMemo(
+    () => [
+      "Semua Kelas",
+      ...new Set(courses.map((c) => c.category).filter(Boolean)),
+    ],
+    [courses],
+  );
+
+  const filteredCourses =
+    activeCategory === "Semua Kelas"
+      ? courses
+      : courses.filter((c) => c.category === activeCategory);
+
+  const handleCategory = (e, cat) => {
+    e.preventDefault();
+    setActiveCategory(cat);
+    setCurrentPage(1); // kembali ke slide pertama saat filter berganti
+  };
 
   // LOGIC SLIDE: 1 page = 4 baris x 3 card = 12 card
   const cardsPerPage = 12;
-  const totalPages = Math.ceil(allVideos.length / cardsPerPage);
+  const totalPages = Math.ceil(filteredCourses.length / cardsPerPage);
 
-  // pecah data jadi beberapa page
+  // pecah data hasil filter jadi beberapa page
   const pages = Array.from({ length: totalPages }, (_, index) =>
-    allVideos.slice(index * cardsPerPage, (index + 1) * cardsPerPage),
+    filteredCourses.slice(index * cardsPerPage, (index + 1) * cardsPerPage),
   );
 
   return (
@@ -257,17 +92,18 @@ function HomePage() {
             <p>Jelajahi Dunia Pengetahuan Melalui Pilihan Kami</p>
           </div>
 
-          {/* CATEGORY MENU */}
+          {/* CATEGORY MENU: otomatis dari kategori kursus */}
           <div className="category">
-            <a href="#video-section" className="active">
-              Semua Kelas
-            </a>
-
-            <a href="#video-section">Pemasaran</a>
-
-            <a href="#video-section">Pengembangan Diri</a>
-
-            <a href="#video-section">Bisnis</a>
+            {categories.map((cat) => (
+              <a
+                key={cat}
+                href="#video-section"
+                className={activeCategory === cat ? "active" : ""}
+                onClick={(e) => handleCategory(e, cat)}
+              >
+                {cat}
+              </a>
+            ))}
           </div>
 
           {/* SLIDER: tiap slide = 1 page berisi 12 card */}
@@ -291,6 +127,12 @@ function HomePage() {
               ))}
             </div>
           </div>
+
+          {filteredCourses.length === 0 && (
+            <p style={{ textAlign: "center", padding: "24px 0" }}>
+              Belum ada kursus di kategori ini.
+            </p>
+          )}
         </section>
 
         {/* PAGINATION (kontrol slide) */}

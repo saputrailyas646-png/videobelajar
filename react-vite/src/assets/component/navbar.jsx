@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../logo.png";
 import avatar from "../ppicon.png";
 import "../styles/navbar.css";
-import { getProfile, logout } from "../utils/auth";
+import { getProfile, logout, isAdmin } from "../utils/auth";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -90,6 +90,17 @@ function Navbar() {
                 <Link to="/pesanan" onClick={() => setProfileOpen(false)}>
                   Pesanan Saya
                 </Link>
+
+                {/* hanya tampil untuk admin */}
+                {isAdmin() && (
+                  <Link
+                    to="/kelola-kursus"
+                    onClick={() => setProfileOpen(false)}
+                  >
+                    Kelola Kursus
+                  </Link>
+                )}
+
                 <button
                   type="button"
                   className="nav-logout"

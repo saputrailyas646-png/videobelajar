@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/kelolakursus.css";
 import { IMAGES } from "../utils/courseData";
-import { getCurrentUser,isAdmin} from "../utils/auth";
+import { getCurrentUser, isAdmin } from "../utils/auth";
+import { fileToDataUrl } from "../utils/imageUpload";
+import MateriEditor from "./MateriEditor";
 import {
   getCourses,
   saveCourses,
@@ -12,6 +14,8 @@ import {
   deleteCourse,
 } from "../utils/courseStore";
 
+// image / avatar = foto upload dari PC (data URL).
+// imageKey / avatarKey = foto bawaan. Kalau upload dipakai, key dikosongkan.
 const EMPTY_FORM = {
   title: "",
   category: "",
@@ -21,7 +25,9 @@ const EMPTY_FORM = {
   price: "",
   oldPrice: "",
   rating: "4.5 (0)",
+  image: "",
   imageKey: "hero",
+  avatar: "",
   avatarKey: "iconpp",
 };
 
@@ -46,8 +52,11 @@ function toFormValues(course) {
     price: course.price,
     oldPrice: course.oldPrice || "",
     rating: course.rating,
-    imageKey: course.imageKey || "hero",
-    avatarKey: course.avatarKey || "iconpp",
+    // foto bawaan -> simpan key saja; foto upload -> simpan data URL-nya
+    image: course.imageKey ? "" : course.image || "",
+    imageKey: course.imageKey || "",
+    avatar: course.avatarKey ? "" : course.avatar || "",
+    avatarKey: course.avatarKey || "",
   };
 }
 
@@ -59,6 +68,27 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // pilih foto bawaan -> hapus foto upload
+  const pickBuiltIn = (field) => (e) => {
+    const { value } = e.target;
+    setForm((prev) => ({ ...prev, [`${field}Key`]: value, [field]: "" }));
+  };
+
+  // pilih file dari PC -> kosongkan key foto bawaan
+  const handleFile = async (e, field) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // supaya file yang sama bisa dipilih lagi
+    if (!file) return;
+
+    try {
+      const dataUrl = await fileToDataUrl(file, field === "image" ? 640 : 200);
+      setForm((prev) => ({ ...prev, [field]: dataUrl, [`${field}Key`]: "" }));
+      setError("");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -80,6 +110,9 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
     setError("");
     onSubmit(form);
   };
+
+  const imageSrc = form.image || IMAGES[form.imageKey];
+  const avatarSrc = form.avatar || IMAGES[form.avatarKey];
 
   return (
     <form className="kk-form" onSubmit={handleSubmit}>
@@ -154,27 +187,68 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
       <div className="kk-row">
         <label>
           Gambar Kursus
-          <select name="imageKey" value={form.imageKey} onChange={handleChange}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleFile(e, "image")}
+          />
+          <select
+            name="imageKey"
+            value={form.imageKey}
+            onChange={pickBuiltIn("image")}
+          >
+            {form.imageKey === "" && <option value="">Foto dari PC</option>}
             {Object.keys(IMAGES).map((k) => (
               <option key={k} value={k}>
                 {k}
               </option>
             ))}
           </select>
+          {imageSrc && (
+            <img
+              src={imageSrc}
+              alt="Pratinjau gambar kursus"
+              style={{
+                width: 160,
+                height: 100,
+                objectFit: "cover",
+                borderRadius: 8,
+              }}
+            />
+          )}
         </label>
+
         <label>
           Foto Mentor
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleFile(e, "avatar")}
+          />
           <select
             name="avatarKey"
             value={form.avatarKey}
-            onChange={handleChange}
+            onChange={pickBuiltIn("avatar")}
           >
+            {form.avatarKey === "" && <option value="">Foto dari PC</option>}
             {Object.keys(IMAGES).map((k) => (
               <option key={k} value={k}>
                 {k}
               </option>
             ))}
           </select>
+          {avatarSrc && (
+            <img
+              src={avatarSrc}
+              alt="Pratinjau foto mentor"
+              style={{
+                width: 72,
+                height: 72,
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
+          )}
         </label>
       </div>
 
@@ -197,7 +271,7 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
 }
 
 /* ---------- Tabel (Read) ---------- */
-function CourseTable({ courses, onEdit, onDelete }) {
+function CourseTable({ courses, onEdit, onDelete, onMateri }) {
   if (courses.length === 0) {
     return <p className="kk-empty">Belum ada kursus yang cocok.</p>;
   }
@@ -230,6 +304,12 @@ function CourseTable({ courses, onEdit, onDelete }) {
               <td>{c.price}</td>
               <td>
                 <div className="kk-actions">
+                  <button
+                    className="kk-btn kk-btn-small"
+                    onClick={() => onMateri(c)}
+                  >
+                    Isi Materi
+                  </button>
                   <button
                     className="kk-btn kk-btn-small"
                     onClick={() => onEdit(c)}
@@ -282,19 +362,29 @@ function KelolaKursusPage() {
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null); // course yang sedang diedit
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [materiTarget, setMateriTarget] = useState(null);
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
 
- useEffect(() => {
-   if (!getCurrentUser()) {
-     navigate("/login", { state: { from: "/kelola-kursus" } });
-   } else if (!isAdmin()) {
-     navigate("/", { replace: true });
-   }
- }, [navigate]);
-  // simpan otomatis setiap data berubah
+  // hanya admin yang boleh masuk
   useEffect(() => {
-    saveCourses(courses);
+    if (!getCurrentUser()) {
+      navigate("/login", { state: { from: "/kelola-kursus" } });
+    } else if (!isAdmin()) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
+
+  // simpan otomatis setiap data berubah.
+  // try/catch: foto upload bisa membuat localStorage penuh.
+  useEffect(() => {
+    try {
+      saveCourses(courses);
+    } catch {
+      setNotice(
+        "Penyimpanan penuh. Perubahan belum tersimpan, coba foto yang lebih kecil.",
+      );
+    }
   }, [courses]);
 
   const categories = useMemo(
@@ -360,12 +450,18 @@ function KelolaKursusPage() {
     flash("Kursus berhasil dihapus.");
   };
 
+  const handleSaveMateri = (curriculum) => {
+    setCourses((prev) => updateCourse(prev, materiTarget.id, { curriculum }));
+    setMateriTarget(null);
+    flash("Materi kursus berhasil disimpan.");
+  };
+
   const handleReset = () => {
     setCourses(resetCourses());
     flash("Data dikembalikan ke awal.");
-    };
-    
-    if (!isAdmin()) return null;
+  };
+
+  if (!isAdmin()) return null;
 
   return (
     <div className="kk-page">
@@ -411,6 +507,7 @@ function KelolaKursusPage() {
         courses={filtered}
         onEdit={openEdit}
         onDelete={setDeleteTarget}
+        onMateri={setMateriTarget}
       />
 
       {deleteTarget && (
@@ -418,6 +515,13 @@ function KelolaKursusPage() {
           course={deleteTarget}
           onConfirm={confirmDelete}
           onCancel={() => setDeleteTarget(null)}
+        />
+      )}
+      {materiTarget && (
+        <MateriEditor
+          course={materiTarget}
+          onSave={handleSaveMateri}
+          onCancel={() => setMateriTarget(null)}
         />
       )}
     </div>

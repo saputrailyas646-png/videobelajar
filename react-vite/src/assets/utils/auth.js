@@ -1,6 +1,6 @@
 const USERS_KEY = "videobelajar_users";
 const SESSION_KEY = "videobelajar_session";
-const SESSION_DURATION = 60 * 60 * 1000; // 2 menit (untuk tes)
+const SESSION_DURATION = 60 * 60 * 1000; // 60 menit
 
 async function hashPassword(password) {
   const data = new TextEncoder().encode(password);
@@ -16,6 +16,27 @@ function getUsers() {
   } catch {
     return [];
   }
+}
+
+// Akun admin tetap untuk latihan (tanpa backend)
+export const ADMIN_EMAIL = "admin@videobelajar.com";
+const ADMIN_PASSWORD = "admin123";
+
+// Buat akun admin otomatis kalau belum ada
+export async function seedAdmin() {
+  if (getUsers().some((u) => u.email === ADMIN_EMAIL)) return;
+
+  const passwordHash = await hashPassword(ADMIN_PASSWORD);
+  const users = getUsers(); // baca ulang setelah await
+  if (users.some((u) => u.email === ADMIN_EMAIL)) return;
+
+  users.push({ name: "Admin", email: ADMIN_EMAIL, phone: "", passwordHash });
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+export function isAdmin() {
+  const user = getCurrentUser();
+  return !!user && user.email === ADMIN_EMAIL;
 }
 
 export async function registerUser({ name, email, phone, password }) {
@@ -38,6 +59,8 @@ export async function registerUser({ name, email, phone, password }) {
 }
 
 export async function loginUser(email, password) {
+  await seedAdmin(); // pastikan akun admin sudah ada
+
   const emailLower = email.trim().toLowerCase();
   const user = getUsers().find((u) => u.email === emailLower);
   const hash = await hashPassword(password);
@@ -79,7 +102,6 @@ export function getSessionRemainingMs() {
 export function logout() {
   localStorage.removeItem(SESSION_KEY);
 }
-
 
 // Data profil lengkap user yang sedang login (gabungan session + data register)
 export function getProfile() {
@@ -127,7 +149,10 @@ export function updateProfile({ name, phone, countryCode, photo }) {
   try {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   } catch {
-    return { ok: false, error: "Penyimpanan penuh, coba foto yang lebih kecil." };
+    return {
+      ok: false,
+      error: "Penyimpanan penuh, coba foto yang lebih kecil.",
+    };
   }
 
   localStorage.setItem(
@@ -141,25 +166,10 @@ export function updateProfile({ name, phone, countryCode, photo }) {
   return { ok: true };
 }
 
-// Akun admin tetap untuk latihan (tanpa backend)
-export const ADMIN_EMAIL = "admin@videobelajar.com";
-const ADMIN_PASSWORD = "admin123";
-
-// Buat akun admin otomatis kalau belum ada
-export async function seedAdmin() {
-  const users = getUsers();
-  if (users.some((u) => u.email === ADMIN_EMAIL)) return;
-
-  users.push({
-    name: "Admin",
-    email: ADMIN_EMAIL,
-    phone: "",
-    passwordHash: await hashPassword(ADMIN_PASSWORD),
-  });
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
-
-export function isAdmin() {
-  const user = getCurrentUser();
-  return !!user && user.email === ADMIN_EMAIL;
-}
+// {
+//   isAdmin() && (
+//     <Link to="/kelola-kursus" onClick={() => setOpen(false)}>
+//       Kelola Kursus
+//     </Link>
+//   );
+// }

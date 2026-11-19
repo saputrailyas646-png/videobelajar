@@ -588,10 +588,16 @@ const QUIZ = {
     ],
   ],
 };
+// Soal bawaan (dari data di atas) untuk kelas dan modul tertentu
+export function getBuiltInQuestions(courseId, moduleIndex) {
+  return (QUIZ[courseId] || [])[moduleIndex] || [];
+}
 
-// Soal sesuai kelas (id card) dan modul
+// Soal sesuai kelas (id card) dan modul.
+// Kalau admin sudah mengisi soal lewat Kelola Kursus (mod.quiz), itu yang dipakai.
 export function getQuestions(cardId, moduleIndex) {
   const course = getCourseById(cardId);
-  const list = QUIZ[course.id] || [];
-  return list[moduleIndex] || list[0] || [];
+  const mod = course.curriculum?.[moduleIndex];
+  if (mod && Array.isArray(mod.quiz)) return mod.quiz;
+  return getBuiltInQuestions(course.id, moduleIndex);
 }
