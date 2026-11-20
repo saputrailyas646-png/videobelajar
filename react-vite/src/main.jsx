@@ -21,7 +21,7 @@ import PesananPage from "./assets/Homepage/pesanan";
 import KelasPage from "./assets/Homepage/kelas";
 import ProfilPage from "./assets/Homepage/profil";
 import AutoLogout from "./assets/component/autoLogout";
-gitimport BelajarPage from "./assets/Homepage/belajar";
+import BelajarPage from "./assets/Homepage/belajar";
 import SertifikatPage from "./assets/Homepage/sertifikat";
 import KelolaKursusPage from "./assets/Homepage/kelolakursus";
 
