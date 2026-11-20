@@ -6,7 +6,7 @@ body {
   display: box;
 }
 
-.nav-a{
+.nav-a {
   width: 100%;
   height: 80px;
   background-color: white;
@@ -30,7 +30,7 @@ body {
 
 .register-box {
   width: min(100%, 590px);
-  height: 720px;
+  min-height: 720px;
   background-color: rgba(255, 255, 255, 1);
   padding: 36px;
   display: flex;
@@ -124,9 +124,9 @@ body {
 .btn-google {
   box-sizing: border-box;
   padding: 10px;
-  border-style: solid;  
-  border-width: 4px;  
-  border-radius: 10px;    
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,15 +137,14 @@ body {
 }
 
 @media (max-width: 890px) {
-
   .a-img {
     width: 140px;
     margin: 14px;
-  }
+  }npm
 
   .register-box {
     width: 320px;
-    height: 620px;
+    min-height: 620px;
     gap: 12px;
     padding: 20px;
     margin: 15px;
@@ -154,7 +153,7 @@ body {
   .register-box form {
     gap: 8px;
   }
-  .nav-a{
+  .nav-a {
     height: 55px;
   }
 }
