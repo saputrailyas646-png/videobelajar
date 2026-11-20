@@ -3,7 +3,7 @@ import Navbar from "../component/navbar";
 import Footer from "../component/footer";
 import { getCurrentUser } from "../utils/auth";
 import { getSummary } from "../utils/learning";
-import { getCourseById } from "../utils/courseStore";
+import { getCourseById } from "../utils/courseLookup";
 import "../styles/sertifikatpage.css";
 
 const MONTHS = [

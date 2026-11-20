@@ -1,7 +1,7 @@
 // Sesuaikan path import dengan struktur foldermu.
 import { useMemo, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { getCourseById } from "../utils/courseStore";
+import { getCourseById } from "../utils/courseLookup";
 import { getCurrentUser } from "../utils/auth";
 import {
   buildSteps,

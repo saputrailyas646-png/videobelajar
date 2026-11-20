@@ -1,4 +1,4 @@
-import { getCourseById } from "./courseStore";
+import { getCourseById } from "./courseLookup";
 import { getCurrentUser } from "./auth";
 import { getQuestions } from "./quizData";
 

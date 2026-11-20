@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCurrentUser } from "../utils/auth";
-import { getCourseById } from "../utils/courseStore";
+import { useCourseStore } from "../../store/useCourseStore";
 import Navbar from "../component/navbar";
 import Footer from "../component/footer";
 
@@ -13,7 +13,12 @@ function InformationProduct() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const course = getCourseById(id);
+  // DATA KURSUS: dicari dari Zustand store berdasarkan id di URL.
+  // id dari URL berupa teks, id di store berupa angka, jadi diubah dulu.
+  const course = useCourseStore((s) =>
+    s.courses.find((c) => c.id === Number(id)),
+  );
+  const loading = useCourseStore((s) => s.loading);
 
   // TOMBOL BELI SEKARANG
   const handleBuy = () => {
@@ -30,6 +35,21 @@ function InformationProduct() {
 
     navigate(`/metode/${id}`);
   };
+
+  // KURSUS BELUM ADA: sedang dimuat dari API, atau id tidak ditemukan
+  if (!course) {
+    return (
+      <>
+        <Navbar />
+        <main className="main">
+          <p style={{ textAlign: "center", padding: "48px 0" }}>
+            {loading ? "Memuat kursus..." : "Kursus tidak ditemukan."}
+          </p>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
   // KOMPONEN TUTOR
   const TutorCard = () => (
@@ -121,7 +141,7 @@ function InformationProduct() {
             <section className="curriculum">
               <h3>Kamu akan Mempelajari</h3>
 
-              {course.curriculum.map((item, index) => (
+              {(course.curriculum ?? []).map((item, index) => (
                 <div className="accordion" key={index}>
                   <button
                     className="accordion-header"
@@ -136,7 +156,7 @@ function InformationProduct() {
 
                   {openIndex === index && (
                     <div className="accordion-content">
-                      {item.lessons.map((lesson, lessonIndex) => (
+                      {(item.lessons ?? []).map((lesson, lessonIndex) => (
                         <div className="lesson-item" key={lessonIndex}>
                           <p>{lesson.title}</p>
 

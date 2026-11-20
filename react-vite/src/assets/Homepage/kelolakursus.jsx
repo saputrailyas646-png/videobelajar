@@ -5,14 +5,7 @@ import { IMAGES } from "../utils/courseData";
 import { getCurrentUser, isAdmin } from "../utils/auth";
 import { fileToDataUrl } from "../utils/imageUpload";
 import MateriEditor from "./MateriEditor";
-import {
-  getCourses,
-  saveCourses,
-  resetCourses,
-  createCourse,
-  updateCourse,
-  deleteCourse,
-} from "../utils/courseStore";
+import { useCourseStore } from "../../store/useCourseStore";
 
 // image / avatar = foto upload dari PC (data URL).
 // imageKey / avatarKey = foto bawaan. Kalau upload dipakai, key dikosongkan.
@@ -44,14 +37,14 @@ const DEFAULT_CURRICULUM = [
 
 function toFormValues(course) {
   return {
-    title: course.title,
-    category: course.category,
-    description: course.description,
-    author: course.author,
-    role: course.role,
-    price: course.price,
+    title: course.title ?? "",
+    category: course.category ?? "",
+    description: course.description ?? "",
+    author: course.author ?? "",
+    role: course.role ?? "",
+    price: course.price ?? "",
     oldPrice: course.oldPrice || "",
-    rating: course.rating,
+    rating: course.rating ?? "",
     // foto bawaan -> simpan key saja; foto upload -> simpan data URL-nya
     image: course.imageKey ? "" : course.image || "",
     imageKey: course.imageKey || "",
@@ -64,6 +57,7 @@ function toFormValues(course) {
 function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
   const [form, setForm] = useState(initialValues);
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,7 +85,7 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const required = [
       "title",
@@ -101,14 +95,21 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
       "role",
       "price",
     ];
-    if (required.some((k) => !form[k].trim())) {
+    if (required.some((k) => !String(form[k] ?? "").trim())) {
       setError(
         "Judul, kategori, deskripsi, mentor, jabatan, dan harga wajib diisi.",
       );
       return;
     }
     setError("");
-    onSubmit(form);
+    setSaving(true);
+    try {
+      // kalau berhasil, halaman induk menutup form ini
+      await onSubmit(form);
+    } catch (err) {
+      setError(err.message || "Gagal menyimpan. Coba lagi.");
+      setSaving(false);
+    }
   };
 
   const imageSrc = form.image || IMAGES[form.imageKey];
@@ -259,11 +260,20 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
           type="button"
           className="kk-btn kk-btn-ghost"
           onClick={onCancel}
+          disabled={saving}
         >
           Batal
         </button>
-        <button type="submit" className="kk-btn kk-btn-primary">
-          {isEdit ? "Simpan Perubahan" : "Tambah Kursus"}
+        <button
+          type="submit"
+          className="kk-btn kk-btn-primary"
+          disabled={saving}
+        >
+          {saving
+            ? "Menyimpan..."
+            : isEdit
+              ? "Simpan Perubahan"
+              : "Tambah Kursus"}
         </button>
       </div>
     </form>
@@ -271,7 +281,11 @@ function CourseForm({ initialValues, isEdit, categories, onSubmit, onCancel }) {
 }
 
 /* ---------- Tabel (Read) ---------- */
-function CourseTable({ courses, onEdit, onDelete, onMateri }) {
+function CourseTable({ courses, loading, onEdit, onDelete, onMateri }) {
+  if (loading && courses.length === 0) {
+    return <p className="kk-empty">Memuat kursus...</p>;
+  }
+
   if (courses.length === 0) {
     return <p className="kk-empty">Belum ada kursus yang cocok.</p>;
   }
@@ -355,10 +369,18 @@ function DeleteModal({ course, onConfirm, onCancel }) {
   );
 }
 
-/* ---------- Halaman (state ada di sini / parent) ---------- */
+/* ---------- Halaman ---------- */
 function KelolaKursusPage() {
   const navigate = useNavigate();
-  const [courses, setCourses] = useState(() => getCourses());
+
+  // DATA & AKSI dari Zustand store (semuanya lewat API mockapi)
+  const courses = useCourseStore((s) => s.courses);
+  const loading = useCourseStore((s) => s.loading);
+  const fetchCourses = useCourseStore((s) => s.fetchCourses);
+  const addCourse = useCourseStore((s) => s.addCourse);
+  const editCourse = useCourseStore((s) => s.editCourse);
+  const removeCourse = useCourseStore((s) => s.removeCourse);
+
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null); // course yang sedang diedit
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -375,20 +397,8 @@ function KelolaKursusPage() {
     }
   }, [navigate]);
 
-  // simpan otomatis setiap data berubah.
-  // try/catch: foto upload bisa membuat localStorage penuh.
-  useEffect(() => {
-    try {
-      saveCourses(courses);
-    } catch {
-      setNotice(
-        "Penyimpanan penuh. Perubahan belum tersimpan, coba foto yang lebih kecil.",
-      );
-    }
-  }, [courses]);
-
   const categories = useMemo(
-    () => [...new Set(courses.map((c) => c.category))],
+    () => [...new Set(courses.map((c) => c.category).filter(Boolean))],
     [courses],
   );
 
@@ -396,7 +406,11 @@ function KelolaKursusPage() {
     const q = query.trim().toLowerCase();
     if (!q) return courses;
     return courses.filter((c) =>
-      [c.title, c.category, c.author].some((v) => v.toLowerCase().includes(q)),
+      [c.title, c.category, c.author].some((v) =>
+        String(v ?? "")
+          .toLowerCase()
+          .includes(q),
+      ),
     );
   }, [courses, query]);
 
@@ -421,7 +435,8 @@ function KelolaKursusPage() {
     setEditing(null);
   };
 
-  const handleSubmit = (values) => {
+  // CREATE & UPDATE. Kalau gagal, error dilempar ke form supaya ditampilkan di sana.
+  const handleSubmit = async (values) => {
     const data = {
       ...values,
       tutor: values.author,
@@ -429,36 +444,40 @@ function KelolaKursusPage() {
     };
 
     if (editing) {
-      setCourses((prev) => updateCourse(prev, editing.id, data));
+      // kirim data lengkap (gabungan lama + baru) supaya field lain tidak hilang
+      await editCourse(editing.id, { ...editing, ...data });
       flash("Kursus berhasil diubah.");
     } else {
-      setCourses((prev) =>
-        createCourse(prev, {
-          ...data,
-          tutorDescription: `Pengajar berpengalaman di bidang ${values.category}.`,
-          curriculum: DEFAULT_CURRICULUM,
-        }),
-      );
+      await addCourse({
+        ...data,
+        tutorDescription: `Pengajar berpengalaman di bidang ${values.category}.`,
+        curriculum: DEFAULT_CURRICULUM,
+      });
       flash("Kursus berhasil ditambahkan.");
     }
     closeForm();
   };
 
-  const confirmDelete = () => {
-    setCourses((prev) => deleteCourse(prev, deleteTarget.id));
+  // DELETE
+  const confirmDelete = async () => {
+    try {
+      await removeCourse(deleteTarget.id);
+      flash("Kursus berhasil dihapus.");
+    } catch (err) {
+      flash(`Gagal menghapus: ${err.message}`);
+    }
     setDeleteTarget(null);
-    flash("Kursus berhasil dihapus.");
   };
 
-  const handleSaveMateri = (curriculum) => {
-    setCourses((prev) => updateCourse(prev, materiTarget.id, { curriculum }));
-    setMateriTarget(null);
-    flash("Materi kursus berhasil disimpan.");
-  };
-
-  const handleReset = () => {
-    setCourses(resetCourses());
-    flash("Data dikembalikan ke awal.");
+  // UPDATE materi
+  const handleSaveMateri = async (curriculum) => {
+    try {
+      await editCourse(materiTarget.id, { ...materiTarget, curriculum });
+      setMateriTarget(null);
+      flash("Materi kursus berhasil disimpan.");
+    } catch (err) {
+      flash(`Gagal menyimpan materi: ${err.message}`);
+    }
   };
 
   if (!isAdmin()) return null;
@@ -474,8 +493,12 @@ function KelolaKursusPage() {
           <p>{courses.length} kursus tersimpan</p>
         </div>
         <div className="kk-actions">
-          <button className="kk-btn kk-btn-ghost" onClick={handleReset}>
-            Reset Data
+          <button
+            className="kk-btn kk-btn-ghost"
+            onClick={fetchCourses}
+            disabled={loading}
+          >
+            {loading ? "Memuat..." : "Muat Ulang"}
           </button>
           <button className="kk-btn kk-btn-primary" onClick={openCreate}>
             + Tambah Kursus
@@ -505,6 +528,7 @@ function KelolaKursusPage() {
 
       <CourseTable
         courses={filtered}
+        loading={loading}
         onEdit={openEdit}
         onDelete={setDeleteTarget}
         onMateri={setMateriTarget}

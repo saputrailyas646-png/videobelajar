@@ -9,7 +9,7 @@ import Footer from "../component/footer";
 import { getCurrentUser } from "../utils/auth";
 import { getMyCourses } from "../utils/payments";
 import { getSummary } from "../utils/learning";
-import { getCourseById } from "../utils/courseStore";
+import { getCourseById } from "../utils/courseLookup";
 const MONTHS = [
   "Januari",
   "Februari",
@@ -252,7 +252,6 @@ function KelasPage() {
                               Detail Kelas
                             </button>
 
-                          
                             <button
                               className="kelas-continue-button"
                               onClick={() =>

@@ -7,20 +7,27 @@ import Footer from "../component/footer";
 import "../styles/global.css";
 import "../styles/home.css";
 
-import { getCourses } from "../utils/courseStore";
+import { useCourseStore } from "../../store/useCourseStore";
 
 function HomePage() {
   // STATE PAGINATION / SLIDE
   const [currentPage, setCurrentPage] = useState(1);
 
-  // DATA KURSUS: dibaca dari courseStore (hasil Kelola Kursus).
+  // DATA KURSUS: dibaca dari Zustand store (hasil GET API).
+  // Ambil array mentahnya saja, lalu olah di useMemo supaya tidak render berulang.
+  const rawCourses = useCourseStore((s) => s.courses);
+  const loading = useCourseStore((s) => s.loading);
+  const error = useCourseStore((s) => s.error);
+
   // company & date diberi nilai bawaan karena kursus baru belum punya.
-  const [courses] = useState(() =>
-    getCourses().map((c) => ({
-      company: "Gojek",
-      date: "2026-11-01",
-      ...c,
-    })),
+  const courses = useMemo(
+    () =>
+      rawCourses.map((c) => ({
+        company: "Gojek",
+        date: "2026-11-01",
+        ...c,
+      })),
+    [rawCourses],
   );
 
   // FILTER KATEGORI: daftar tombol dibuat dari kategori yang ada di data kursus
@@ -106,6 +113,18 @@ function HomePage() {
             ))}
           </div>
 
+          {/* STATUS LOADING / ERROR dari API */}
+          {loading && (
+            <p style={{ textAlign: "center", padding: "24px 0" }}>
+              Memuat kursus...
+            </p>
+          )}
+          {error && (
+            <p style={{ textAlign: "center", padding: "24px 0" }}>
+              Gagal memuat kursus: {error}
+            </p>
+          )}
+
           {/* SLIDER: tiap slide = 1 page berisi 12 card */}
           <div className="slider">
             <div
@@ -128,7 +147,7 @@ function HomePage() {
             </div>
           </div>
 
-          {filteredCourses.length === 0 && (
+          {!loading && !error && filteredCourses.length === 0 && (
             <p style={{ textAlign: "center", padding: "24px 0" }}>
               Belum ada kursus di kategori ini.
             </p>

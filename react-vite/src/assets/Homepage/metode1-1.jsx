@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import "../styles/metode1-1.css";
 import Navbar from "../component/navbar";
-import { getCourseById } from "../utils/courseStore";
+import { getCourseById } from "../utils/courseLookup";
 import { getCurrentUser } from "../utils/auth";
 import {
   createOrder,

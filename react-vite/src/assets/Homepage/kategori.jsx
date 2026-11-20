@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import Navbar from "../component/navbar";
 import Footer from "../component/footer";
@@ -8,7 +8,7 @@ import "../styles/global.css";
 
 import VideoCard from "../component/card";
 
-import { getCourses } from "../utils/courseStore";
+import { useCourseStore } from "../../store/useCourseStore";
 
 // kategori bawaan (kategori baru dari Kelola Kursus ditambahkan otomatis)
 const DEFAULT_CATEGORIES = [
@@ -61,18 +61,31 @@ function CategoriPage() {
     };
   });
 
-  // DATA KURSUS: dibaca dari courseStore (hasil Kelola Kursus)
-  const [courses] = useState(() =>
-    getCourses().map((c) => ({
-      date: "2026-11-01",
-      ...c,
-    })),
+  // DATA KURSUS: dibaca dari Zustand store (hasil GET API).
+  // Ambil array mentahnya saja, lalu olah di useMemo.
+  const rawCourses = useCourseStore((s) => s.courses);
+  const loading = useCourseStore((s) => s.loading);
+  const error = useCourseStore((s) => s.error);
+
+  const courses = useMemo(
+    () =>
+      rawCourses.map((c) => ({
+        date: "2026-11-01",
+        ...c,
+      })),
+    [rawCourses],
   );
 
   // daftar kategori: bawaan + kategori baru dari data kursus
-  const categories = [
-    ...new Set([...DEFAULT_CATEGORIES, ...courses.map((c) => c.category)]),
-  ];
+  const categories = useMemo(
+    () => [
+      ...new Set([
+        ...DEFAULT_CATEGORIES,
+        ...courses.map((c) => c.category).filter(Boolean),
+      ]),
+    ],
+    [courses],
+  );
 
   // TOGGLE ACCORDION
   const toggleFilter = (filterName) => {
@@ -293,7 +306,11 @@ function CategoriPage() {
             </div>
 
             <div className="category-course-grid">
-              {currentVideos.length > 0 ? (
+              {loading ? (
+                <p>Memuat kursus...</p>
+              ) : error ? (
+                <p>Gagal memuat kursus: {error}</p>
+              ) : currentVideos.length > 0 ? (
                 currentVideos.map((item) => (
                   <VideoCard key={item.id} course={item} />
                 ))
