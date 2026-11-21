@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCurrentUser } from "../utils/auth";
-import { useCourseStore } from "../../store/useCourseStore";
+import { useSelector } from "react-redux";
 import Navbar from "../component/navbar";
 import Footer from "../component/footer";
 
@@ -13,12 +13,12 @@ function InformationProduct() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // DATA KURSUS: dicari dari Zustand store berdasarkan id di URL.
+  // DATA KURSUS: dicari dari Redux store berdasarkan id di URL.
   // id dari URL berupa teks, id di store berupa angka, jadi diubah dulu.
-  const course = useCourseStore((s) =>
-    s.courses.find((c) => c.id === Number(id)),
+  const course = useSelector((state) =>
+    state.courses.courses.find((c) => c.id === Number(id)),
   );
-  const loading = useCourseStore((s) => s.loading);
+  const loading = useSelector((state) => state.courses.loading);
 
   // TOMBOL BELI SEKARANG
   const handleBuy = () => {

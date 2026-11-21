@@ -1,9 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import "./assets/styles/global.css";
 
-import { useCourseStore } from "./store/useCourseStore";
+import { store } from "./store/redux/store";
+import { fetchCourses } from "./store/redux/coursesSlice";
 
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
@@ -25,17 +27,13 @@ import BelajarPage from "./assets/Homepage/belajar";
 import SertifikatPage from "./assets/Homepage/sertifikat";
 import KelolaKursusPage from "./assets/Homepage/kelolakursus";
 
-// Ambil data kursus dari API satu kali saat app dibuka
-useCourseStore.getState().fetchCourses();
 const root = createRoot(document.getElementById("root"));
 root.render(<p style={{ padding: 24 }}>Memuat data...</p>);
 
-// Tampilkan aplikasi setelah data kursus selesai dimuat dari API
-useCourseStore
-  .getState()
-  .fetchCourses()
-  .then(() => {
-    root.render(
+// Ambil data kursus dari API satu kali, lalu tampilkan aplikasi
+store.dispatch(fetchCourses()).then(() => {
+  root.render(
+    <Provider store={store}>
       <BrowserRouter>
         <AutoLogout />
         <Routes>
@@ -56,6 +54,7 @@ useCourseStore
           <Route path="/sertifikat/:id" element={<SertifikatPage />} />
           <Route path="/kelola-kursus" element={<KelolaKursusPage />} />
         </Routes>
-      </BrowserRouter>,
-    );
-  });
+      </BrowserRouter>
+    </Provider>,
+  );
+});

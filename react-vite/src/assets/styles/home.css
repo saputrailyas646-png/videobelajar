@@ -99,12 +99,14 @@
 
 .slider-track {
   display: flex;
+  align-items: flex-start; /* TAMBAH: slide tidak dipaksa sama tinggi */
   transition: transform 0.4s ease;
 }
 
 .slider-page {
   flex: 0 0 100%;
   min-width: 0;
+  align-content: start; /* TAMBAH: baris grid tidak melar mengisi ruang */
 }
 
 /* =========================

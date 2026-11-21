@@ -5,7 +5,13 @@ import { IMAGES } from "../utils/courseData";
 import { getCurrentUser, isAdmin } from "../utils/auth";
 import { fileToDataUrl } from "../utils/imageUpload";
 import MateriEditor from "./MateriEditor";
-import { useCourseStore } from "../../store/useCourseStore";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCourses,
+  addCourse,
+  editCourse,
+  removeCourse,
+} from "../../store/redux/coursesSlice";
 
 // image / avatar = foto upload dari PC (data URL).
 // imageKey / avatarKey = foto bawaan. Kalau upload dipakai, key dikosongkan.
@@ -373,13 +379,10 @@ function DeleteModal({ course, onConfirm, onCancel }) {
 function KelolaKursusPage() {
   const navigate = useNavigate();
 
-  // DATA & AKSI dari Zustand store (semuanya lewat API mockapi)
-  const courses = useCourseStore((s) => s.courses);
-  const loading = useCourseStore((s) => s.loading);
-  const fetchCourses = useCourseStore((s) => s.fetchCourses);
-  const addCourse = useCourseStore((s) => s.addCourse);
-  const editCourse = useCourseStore((s) => s.editCourse);
-  const removeCourse = useCourseStore((s) => s.removeCourse);
+  // DATA & AKSI dari Redux store (semuanya lewat API mockapi)
+  const dispatch = useDispatch();
+  const courses = useSelector((state) => state.courses.courses);
+  const loading = useSelector((state) => state.courses.loading);
 
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null); // course yang sedang diedit
@@ -445,14 +448,18 @@ function KelolaKursusPage() {
 
     if (editing) {
       // kirim data lengkap (gabungan lama + baru) supaya field lain tidak hilang
-      await editCourse(editing.id, { ...editing, ...data });
+      await dispatch(
+        editCourse({ id: editing.id, changes: { ...editing, ...data } }),
+      ).unwrap();
       flash("Kursus berhasil diubah.");
     } else {
-      await addCourse({
-        ...data,
-        tutorDescription: `Pengajar berpengalaman di bidang ${values.category}.`,
-        curriculum: DEFAULT_CURRICULUM,
-      });
+      await dispatch(
+        addCourse({
+          ...data,
+          tutorDescription: `Pengajar berpengalaman di bidang ${values.category}.`,
+          curriculum: DEFAULT_CURRICULUM,
+        }),
+      ).unwrap();
       flash("Kursus berhasil ditambahkan.");
     }
     closeForm();
@@ -461,7 +468,7 @@ function KelolaKursusPage() {
   // DELETE
   const confirmDelete = async () => {
     try {
-      await removeCourse(deleteTarget.id);
+      await dispatch(removeCourse(deleteTarget.id)).unwrap();
       flash("Kursus berhasil dihapus.");
     } catch (err) {
       flash(`Gagal menghapus: ${err.message}`);
@@ -472,7 +479,12 @@ function KelolaKursusPage() {
   // UPDATE materi
   const handleSaveMateri = async (curriculum) => {
     try {
-      await editCourse(materiTarget.id, { ...materiTarget, curriculum });
+      await dispatch(
+        editCourse({
+          id: materiTarget.id,
+          changes: { ...materiTarget, curriculum },
+        }),
+      ).unwrap();
       setMateriTarget(null);
       flash("Materi kursus berhasil disimpan.");
     } catch (err) {
@@ -495,7 +507,7 @@ function KelolaKursusPage() {
         <div className="kk-actions">
           <button
             className="kk-btn kk-btn-ghost"
-            onClick={fetchCourses}
+            onClick={() => dispatch(fetchCourses())}
             disabled={loading}
           >
             {loading ? "Memuat..." : "Muat Ulang"}

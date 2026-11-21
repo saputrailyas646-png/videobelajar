@@ -7,7 +7,7 @@ import Footer from "../component/footer";
 import "../styles/global.css";
 import "../styles/home.css";
 
-import { useCourseStore } from "../../store/useCourseStore";
+import { useSelector } from "react-redux";
 
 function HomePage() {
   // STATE PAGINATION / SLIDE
@@ -15,9 +15,9 @@ function HomePage() {
 
   // DATA KURSUS: dibaca dari Zustand store (hasil GET API).
   // Ambil array mentahnya saja, lalu olah di useMemo supaya tidak render berulang.
-  const rawCourses = useCourseStore((s) => s.courses);
-  const loading = useCourseStore((s) => s.loading);
-  const error = useCourseStore((s) => s.error);
+const rawCourses = useSelector((state) => state.courses.courses);
+const loading = useSelector((state) => state.courses.loading);
+const error = useSelector((state) => state.courses.error);
 
   // company & date diberi nilai bawaan karena kursus baru belum punya.
   const courses = useMemo(

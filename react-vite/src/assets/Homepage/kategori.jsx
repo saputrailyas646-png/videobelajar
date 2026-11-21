@@ -8,7 +8,7 @@ import "../styles/global.css";
 
 import VideoCard from "../component/card";
 
-import { useCourseStore } from "../../store/useCourseStore";
+import { useSelector } from "react-redux";
 
 // kategori bawaan (kategori baru dari Kelola Kursus ditambahkan otomatis)
 const DEFAULT_CATEGORIES = [
@@ -60,13 +60,11 @@ function CategoriPage() {
       durasi: false,
     };
   });
-
-  // DATA KURSUS: dibaca dari Zustand store (hasil GET API).
+  // DATA KURSUS: dibaca dari Redux store (hasil GET API).
   // Ambil array mentahnya saja, lalu olah di useMemo.
-  const rawCourses = useCourseStore((s) => s.courses);
-  const loading = useCourseStore((s) => s.loading);
-  const error = useCourseStore((s) => s.error);
-
+  const rawCourses = useSelector((state) => state.courses.courses);
+  const loading = useSelector((state) => state.courses.loading);
+  const error = useSelector((state) => state.courses.error);
   const courses = useMemo(
     () =>
       rawCourses.map((c) => ({
